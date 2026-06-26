@@ -160,7 +160,7 @@ En la raíz hay un `netlify.toml` que ya define la build:
 1. **Add new site → Import an existing project** y conectá el repo de GitHub.
    Netlify toma el `netlify.toml` automáticamente (build `npm run build`,
    publica `out/`).
-2. **Domain management → Add a domain:** agregá `biodesignargentina.com` y `www`.
+2. **Domain management → Add a domain:** agregá `biodesign-argentina.com` y `www`.
 3. **DNS en Wix** (Pointing — Wix no deja cambiar nameservers):
    - **A** · Host `@` → **`75.2.60.5`** (load balancer de Netlify)
    - **CNAME** · Host `www` → **`<tu-sitio>.netlify.app`**
@@ -171,7 +171,7 @@ En la raíz hay un `netlify.toml` que ya define la build:
 ## Deploy en Vercel (alternativa)
 
 1. Importá el repo en Vercel (detecta Next.js). Alternativa: `npx vercel`.
-2. **Settings → Domains:** agregá `biodesignargentina.com` y `www`.
+2. **Settings → Domains:** agregá `biodesign-argentina.com` y `www`.
 3. **DNS en Wix:** **A** `@` → **`76.76.21.21`** · **CNAME** `www` →
    **`cname.vercel-dns.com`** (confirmá los valores en Vercel → Domains).
 

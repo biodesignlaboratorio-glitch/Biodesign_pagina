@@ -19,9 +19,9 @@ export const site = {
   /** Hero kicker / location line */
   locationKicker: "Caballito · Canning · Buenos Aires",
 
-  domain: "biodesignargentina.com",
-  url: "https://www.biodesignargentina.com",
-  email: "info@biodesignargentina.com",
+  domain: "biodesign-argentina.com",
+  url: "https://www.biodesign-argentina.com",
+  email: "info@biodesign-argentina.com",
   /** Alias de pago */
   alias: "biodesign.arg",
 
