@@ -1,0 +1,55 @@
+.team {
+  background: var(--ink);
+  padding: 60px 64px 100px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 56px auto 0;
+}
+.card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1c1c1c, #0a0a0a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card svg {
+  width: 80px;
+  height: 80px;
+  color: rgba(191, 160, 84, 0.3);
+}
+.info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 26px;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.85));
+}
+.name {
+  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.role {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@media (max-width: 860px) {
+  .team {
+    padding: 48px 28px 72px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+}

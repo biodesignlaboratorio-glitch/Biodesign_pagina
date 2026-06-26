@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIODESIGN — Odontología & Estética</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0C0C0C;--ink-soft:#1A1A1A;--gold:#BFA054;--gold-lt:#D4B46A;--gold-dim:rgba(191,160,84,0.18);--cream:#F9F7F3;--mid:#5A5652;--rule:rgba(191,160,84,0.22);--ease:cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;font-weight:300;background:#fff;color:#111;overflow-x:hidden}
+img{display:block}a{text-decoration:none;color:inherit}button{font-family:'Inter',sans-serif;cursor:pointer}
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 52px;background:rgba(12,12,12,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--rule);transition:background .4s var(--ease)}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-logo img{width:64px;height:64px;object-fit:contain;border-radius:50%}
+.nav-logo-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;color:#fff;letter-spacing:.18em;display:block}
+.nav-logo-sub{font-size:.5rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:block;margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:.65rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);transition:color .25s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links .cta{border:1px solid var(--gold);color:var(--gold)!important;padding:9px 20px;transition:all .25s!important}
+.nav-links .cta:hover{background:var(--gold);color:var(--ink)!important}
+.hero{margin-top:80px;display:grid;grid-template-columns:2fr 3fr;min-height:calc(100vh - 80px);background:var(--ink);overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:80px 56px 80px 72px;position:relative;z-index:2}
+.hero-kicker{font-size:.66rem;font-weight:400;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,4.4vw,5.2rem);font-weight:700;line-height:1.05;color:#fff;margin-bottom:14px}
+.hero-h1 .gw{color:var(--gold)}
+.hero-subtitle{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,1.8vw,1.55rem);font-weight:400;font-style:italic;color:var(--gold);margin-bottom:28px;line-height:1.3}
+.hero-body{font-size:.88rem;font-weight:300;line-height:1.9;color:rgba(255,255,255,.7);max-width:400px;margin-bottom:48px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn-fill{background:var(--gold);color:var(--ink);border:none;padding:14px 30px;font-size:.72rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;transition:background .25s,transform .25s;display:inline-block}
+.btn-fill:hover{background:var(--gold-lt);transform:translateY(-2px)}
+.btn-line{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);padding:14px 30px;font-size:.72rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;transition:all .25s;display:inline-block}
+.btn-line:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-right{position:relative;overflow:hidden;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.hero-photo{width:100%;height:100%;object-fit:cover;object-position:90% center;opacity:.96;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 12%,black 30%,black 70%,transparent 100%),linear-gradient(180deg,transparent 0%,black 15%,black 100%);-webkit-mask-composite:destination-in;mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.4) 12%,black 30%,black 70%,transparent 100%),linear-gradient(180deg,transparent 0%,black 15%,black 100%);mask-composite:intersect}
+.hero-pills{display:none}
+.hero-pill{display:none}
+.hero-pill-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;color:var(--gold);line-height:1}
+.hero-pill-lbl{font-size:.6rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:#fff;line-height:1.4}
+.sec-eyebrow{display:flex;align-items:center;gap:14px;font-size:.64rem;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.sec-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);display:block}
+.sec-h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,3.2rem);font-weight:400;line-height:1.12}
+.sec-h2 i{font-style:italic;color:var(--gold)}
+.sec-h2--light{color:#fff}
+.trat-section{padding:96px 80px;background:#fff}
+.trat-intro{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:end;margin-bottom:56px}
+.trat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.trat-card{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--ink);cursor:pointer}
+.trat-card-img{width:100%;height:100%;object-fit:cover;opacity:.6;transition:transform .55s var(--ease),opacity .55s var(--ease)}
+.trat-card:hover .trat-card-img{transform:scale(1.04);opacity:.35}
+.trat-card-body{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;background:linear-gradient(to top,rgba(12,12,12,.95) 0%,rgba(12,12,12,.3) 55%,transparent 100%)}
+.trat-card-badge{font-size:.55rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.trat-card-name{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:400;color:#fff;margin-bottom:4px;line-height:1.2}
+.trat-card-line{width:32px;height:1px;background:var(--gold);margin-bottom:10px;transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.trat-card:hover .trat-card-line{transform:scaleX(1)}
+.trat-card-desc{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.85);line-height:1.65;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s var(--ease),opacity .35s}
+.trat-card:hover .trat-card-desc{max-height:80px;opacity:1}
+.trat-card-link{font-size:.64rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-top:10px;max-height:0;overflow:hidden;opacity:0;transition:max-height .45s var(--ease),opacity .4s .1s;display:inline-block}
+.trat-card:hover .trat-card-link{max-height:30px;opacity:1}
+.mas-toggle{text-align:center;margin:28px 0 0}
+.mas-btn{background:transparent;border:1px solid var(--rule);color:var(--mid);padding:12px 32px;font-size:.68rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;transition:all .3s}
+.mas-btn:hover{border-color:var(--gold);color:var(--gold)}
+.mas-grid{display:none;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:3px}
+.mas-grid.open{display:grid}
+.tpanel-overlay{display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.7);backdrop-filter:blur(6px)}
+.tpanel-overlay.open{display:block}
+.tpanel{display:none;position:fixed;inset:0;z-index:850;background:#fff;overflow-y:auto;opacity:0;transform:scale(.97);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.tpanel.open{display:block;opacity:1;transform:scale(1)}
+.tpanel-inner{padding:96px 10% 80px;max-width:1200px;margin:0 auto}
+.tpanel-close{position:fixed;top:18px;right:18px;z-index:1000;display:flex;align-items:center;gap:8px;background:var(--ink);border:1.5px solid var(--gold);color:var(--gold);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:12px 24px;cursor:pointer;transition:all .25s;box-shadow:0 6px 24px rgba(0,0,0,.5);border-radius:2px}
+.tpanel-close:hover{background:var(--gold);color:var(--ink)}
+.tpanel-badge{font-size:.6rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.tpanel-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;line-height:1.1;margin-bottom:16px}
+.tpanel-desc{font-size:.88rem;font-weight:300;color:var(--mid);line-height:1.85;max-width:600px;margin-bottom:40px;padding-bottom:36px;border-bottom:1px solid #eee}
+.tpanel-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.tpanel-section-title{font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.tp-steps{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+.tp-step{display:flex;flex-direction:column;gap:6px;padding:18px 16px;background:#f9f7f3;border-left:3px solid var(--gold);transition:background .25s}
+.tp-step:hover{background:#f3efe6}
+.tp-step-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:300;color:var(--gold);line-height:1}
+.tp-step-name{font-size:.74rem;font-weight:600;letter-spacing:.04em;color:var(--ink);margin-bottom:0}
+.tp-step-desc{font-size:.74rem;font-weight:300;color:var(--mid);line-height:1.5;margin-bottom:0}
+.tp-step-price{font-size:.68rem;font-weight:600;color:var(--gold);margin-top:auto}
+.tp-prices{margin-bottom:28px}
+.tp-price-item{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #f0eeea}
+.tp-price-label{font-size:.72rem;font-weight:300;color:var(--mid)}
+.tp-price-val{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--ink)}
+.tp-payment{background:#f9f7f3;padding:20px 22px;margin-bottom:32px}
+.tp-payment-title{font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.tp-payment-item{font-size:.76rem;font-weight:300;color:var(--mid);padding:5px 0;display:flex;align-items:center;gap:8px}
+.tp-tag{background:var(--gold);color:var(--ink);font-size:.55rem;font-weight:600;padding:2px 6px}
+.tp-payment-alias{font-size:.7rem;color:var(--mid);margin-top:10px;padding-top:10px;border-top:1px solid #eee}
+.tp-faqs{display:flex;flex-direction:column;gap:8px}
+.tp-faq{border:1px solid #f0eeea;cursor:pointer;padding:0 14px;border-radius:2px;transition:background .25s}
+.tp-faq.open{background:#f9f7f3}
+.tp-faq-q{display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-size:.78rem;font-weight:500;color:var(--ink);gap:12px}
+.tp-faq-icon{font-size:1.2rem;font-weight:300;color:var(--gold);flex-shrink:0;transition:transform .3s}
+.tp-faq.open .tp-faq-icon{transform:rotate(45deg)}
+.tp-faq-a{font-size:.76rem;font-weight:300;color:var(--mid);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s var(--ease),padding .3s}
+.tp-faq.open .tp-faq-a{max-height:200px;padding-bottom:14px}
+.tp-warning,.tp-nota{font-size:.76rem;font-weight:300;line-height:1.6;padding:12px 16px;margin-bottom:20px;border-left:2px solid var(--gold)}
+.tp-warning{background:#fff8ee;color:#7a5a1a}
+.tp-nota{background:#f4f0ff;color:#5a4a7a}
+.tp-btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--ink);padding:14px 24px;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;transition:background .25s}
+.tp-btn-wa:hover{background:var(--gold-lt)}
+.tp-btn-reserva{display:block;text-align:center;border:1px solid var(--ink);color:var(--ink);padding:13px 24px;font-size:.68rem;font-weight:300;letter-spacing:.16em;text-transform:uppercase;transition:all .25s}
+.tp-btn-reserva:hover{border-color:var(--gold);color:var(--gold)}
+.smileline{background:var(--ink);display:grid;grid-template-columns:2fr 3fr;overflow:hidden;min-height:620px}
+.smileline-left{padding:80px 64px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+.smileline-badge{display:inline-block;font-size:.7rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:7px 16px;margin-bottom:28px;width:fit-content}
+.smileline-h{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.2vw,5rem);font-weight:400;color:#fff;line-height:1.05;margin-bottom:14px}
+.smileline-h i{font-style:italic;color:var(--gold);display:block}
+.smileline-sub{font-size:1.05rem;font-weight:300;color:rgba(255,255,255,.8);line-height:1.9;max-width:440px;margin-bottom:40px}
+.smileline-checks{list-style:none;margin-bottom:44px}
+.smileline-checks li{font-size:.95rem;font-weight:300;color:#fff;padding:13px 0;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px}
+.smileline-checks li::before{content:'';width:16px;height:16px;flex-shrink:0;border:1px solid var(--gold);border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23BFA054' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.smileline-right{position:relative;overflow:hidden;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.smileline-img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.97;-webkit-mask-image:radial-gradient(ellipse 75% 63% at 62% 50%,black 18%,rgba(0,0,0,.55) 48%,transparent 76%);mask-image:radial-gradient(ellipse 75% 63% at 62% 50%,black 18%,rgba(0,0,0,.55) 48%,transparent 76%)}
+.pasos{background:#F9F7F3;padding:96px 80px}
+.pasos-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.2vw,2.2rem);font-weight:400;text-align:center;letter-spacing:.08em;text-transform:uppercase;margin-bottom:72px;color:#222}
+.pasos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;align-items:start}
+.paso{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;position:relative;cursor:default}
+.paso-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1;margin-bottom:16px;transition:transform .35s var(--ease)}
+.paso:hover .paso-num{transform:scale(1.1)}
+.paso-img-wrap{width:260px;height:200px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;position:relative}
+.paso-img{max-width:255px;max-height:195px;width:100%;height:100%;object-fit:contain;transition:transform .4s var(--ease),filter .4s var(--ease)}
+.paso:hover .paso-img{transform:translateY(-6px);filter:drop-shadow(0 10px 24px rgba(191,160,84,.25))}
+.paso-arrow{position:absolute;right:-14px;top:154px;transform:translateY(-50%);z-index:2;color:var(--gold);font-size:1.5rem;line-height:1;opacity:.5;transition:opacity .3s,transform .3s}
+.paso:last-child .paso-arrow{display:none}
+.paso:hover .paso-arrow{opacity:.9;transform:translateY(-50%) translateX(4px)}
+.paso-line{width:0;height:2px;background:var(--gold);margin-bottom:12px;transition:width .5s var(--ease)}
+.paso:hover .paso-line{width:36px}
+.paso-name{font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#A6843F;margin-bottom:10px}
+.paso-desc{font-size:.78rem;font-weight:300;color:#666;line-height:1.75;max-width:200px}
+.casos{background:var(--ink);padding:80px}
+.casos-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px}
+.casos-tabs{display:flex;gap:2px;margin-bottom:3px}
+.caso-tab{flex:1;background:rgba(255,255,255,.05);border:none;color:rgba(255,255,255,.65);font-size:.62rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:13px 8px;transition:all .25s;border-bottom:2px solid transparent;cursor:pointer}
+.caso-tab.on{color:var(--gold);border-bottom-color:var(--gold);background:var(--gold-dim)}
+.caso-tab:hover:not(.on){color:#fff}
+.casos-frame{position:relative;line-height:0;border:1px solid var(--rule)}
+.casos-frame img{width:100%;display:block;transition:opacity .2s}
+.casos-frame .lbl{position:absolute;top:16px;font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;background:rgba(0,0,0,.65);color:#fff;padding:5px 12px;z-index:4}
+.casos-frame .lbl-a{left:16px}.casos-frame .lbl-d{right:16px}
+.casos-frame .divider{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--gold);opacity:.7}
+.ba-slider{aspect-ratio:16/10;cursor:ew-resize;touch-action:none;-webkit-user-select:none;user-select:none}
+.ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ba-img-before{filter:grayscale(1) brightness(.92)}
+.ba-after-wrap{position:absolute;inset:0;z-index:2;clip-path:inset(0 0 0 50%)}
+.ba-after-wrap .ba-img{position:absolute;inset:0}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:0;z-index:3;pointer-events:none}
+.ba-handle-line{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--gold);transform:translateX(-50%)}
+.ba-handle-grip{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.ba-note{font-size:.66rem;color:rgba(255,255,255,.5);text-align:center;margin-top:14px;font-style:italic}
+.btn-ver{border:1px solid rgba(255,255,255,.3);background:transparent;color:rgba(255,255,255,.75);padding:10px 22px;font-size:.64rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;transition:all .25s;display:inline-block}
+.btn-ver:hover{border-color:var(--gold);color:var(--gold)}
+.digital{background:var(--cream);padding:80px}
+.digital-inner{display:grid;grid-template-columns:5fr 7fr;gap:80px;align-items:center}
+.digital-body{font-size:.86rem;font-weight:300;color:var(--mid);line-height:1.85;margin:20px 0 44px;max-width:360px}
+.digital-items{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.ditem{border-left:2px solid var(--rule);padding-left:18px}
+.ditem-name{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.ditem-desc{font-size:.76rem;font-weight:300;color:var(--mid);line-height:1.6}
+.digital-photo{width:100%;aspect-ratio:16/9;object-fit:cover}
+.porque{background:var(--ink);padding:80px}
+.porque-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin-top:60px}
+.pitem{background:rgba(255,255,255,.04);padding:36px 24px;text-align:center;border-top:2px solid transparent;transition:all .3s;cursor:default}
+.pitem:hover{background:var(--gold-dim);border-top-color:var(--gold)}
+.pitem-icon{margin:0 auto 18px;width:40px;height:40px;color:var(--gold);opacity:.9}
+.pitem-name{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#fff;line-height:1.5}
+.reviews{background:#fff;padding:80px}
+.reviews-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:0}
+.reviews-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--ink);padding:6px 14px;font-size:.62rem;font-weight:600;letter-spacing:.1em}
+.reviews-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px}
+.rcard{padding:32px 26px;border:1px solid #eee;transition:box-shadow .3s,transform .3s}
+.rcard:hover{box-shadow:0 12px 40px rgba(0,0,0,.07);transform:translateY(-3px)}
+.rcard-stars{color:var(--gold);font-size:.78rem;letter-spacing:3px;margin-bottom:14px}
+.rcard-q{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:#333;line-height:1.55;margin-bottom:20px}
+.rcard-name{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.rcard-src{font-size:.62rem;color:#888;margin-top:3px}
+.sedes{background:var(--cream);padding:80px}
+.sedes-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:960px;margin:60px auto 0}
+.scard{background:#fff;border-bottom:3px solid transparent;transition:all .3s;overflow:hidden}
+.scard:hover{border-bottom-color:var(--gold);box-shadow:0 14px 44px rgba(0,0,0,.07)}
+.scard-map{width:100%;height:180px;border:none;display:block}
+.scard-body{padding:32px 32px 28px}
+.scard-badge{font-size:.6rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.scard-name{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;line-height:1.1;margin-bottom:14px}
+.scard-addr{font-size:.78rem;font-weight:300;color:var(--mid);line-height:1.8;margin-bottom:22px}
+.scard-btns{display:flex;gap:10px}
+.btn-dark{background:var(--ink);color:#fff;border:none;padding:11px 20px;font-size:.62rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;transition:background .25s;display:inline-block}
+.btn-dark:hover{background:var(--gold);color:var(--ink)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid #d8d5d0;padding:11px 20px;font-size:.62rem;font-weight:300;letter-spacing:.16em;text-transform:uppercase;transition:all .25s;display:inline-block}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.contacto{background:var(--ink-soft);padding:96px 80px}
+.contacto-inner{max-width:600px;margin:0 auto;text-align:center}
+.contacto-inner .sec-eyebrow{justify-content:center}
+.contacto-inner .sec-eyebrow::before{display:none}
+.contacto-intro{font-size:.86rem;font-weight:300;color:rgba(255,255,255,.75);line-height:1.8;margin:16px 0 44px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;text-align:left}
+.form-full{margin-bottom:12px;text-align:left}
+.finput{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(191,160,84,.25);color:#fff;padding:14px 16px;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:300;outline:none;transition:border-color .25s}
+.finput::placeholder{color:rgba(255,255,255,.45)}
+.finput:focus{border-color:var(--gold)}
+select.finput option{background:#1a1a1a;color:#fff}
+textarea.finput{min-height:88px;resize:vertical}
+.btn-wa{width:100%;background:var(--gold);color:var(--ink);border:none;padding:16px 40px;font-family:'Inter',sans-serif;font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;transition:background .25s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:12px;text-decoration:none}
+.btn-wa:hover{background:var(--gold-lt)}
+footer{background:var(--ink);border-top:1px solid var(--rule);padding:40px 80px;display:flex;align-items:center;justify-content:space-between}
+.footer-brand{display:flex;align-items:center;gap:12px}
+.footer-brand img{width:48px;height:48px;object-fit:contain;border-radius:50%}
+.footer-brand-text{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;color:#fff;letter-spacing:.16em}
+.footer-brand-text span{display:block;font-family:'Inter',sans-serif;font-size:.5rem;font-weight:300;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+.footer-copy{font-size:.6rem;color:rgba(255,255,255,.35);letter-spacing:.08em;text-align:center}
+.footer-social{display:flex;gap:14px;justify-content:center;margin-top:12px}
+.footer-social a{width:36px;height:36px;border:1px solid var(--rule);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .25s;color:var(--gold)}
+.footer-social a:hover{border-color:var(--gold);background:var(--gold-dim)}
+.footer-social svg{width:18px;height:18px}
+.footer-contact{text-align:right}
+.footer-contact a{display:block;font-size:.66rem;font-weight:300;color:rgba(255,255,255,.5);margin-bottom:5px;transition:color .25s}
+.footer-contact a:hover{color:var(--gold)}
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+[data-reveal].vis{opacity:1;transform:none}
+[data-reveal="1"]{transition-delay:.08s}[data-reveal="2"]{transition-delay:.16s}[data-reveal="3"]{transition-delay:.24s}[data-reveal="4"]{transition-delay:.32s}[data-reveal="5"]{transition-delay:.40s}
+@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;transition:none}}
+
+.nav-dropdown{position:relative}
+.nav-dropdown-toggle{display:flex;align-items:center;gap:4px;cursor:pointer}
+.nav-dropdown-menu{
+  display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  margin-top:20px;
+  background:rgba(10,10,10,.98);backdrop-filter:blur(20px);
+  border:1px solid var(--rule);border-top:2px solid var(--gold);
+  padding:28px 32px;gap:32px;min-width:480px;
+  grid-template-columns:1fr 1fr;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  z-index:950;
+}
+.nav-dropdown::after{
+  content:'';position:absolute;top:100%;left:0;right:0;height:20px;
+}
+.nav-dropdown:hover .nav-dropdown-menu{display:grid}
+.nav-dropdown-heading{font-size:.55rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.nav-dropdown-menu a{display:block;font-size:.68rem;font-weight:300;color:rgba(255,255,255,.75);padding:7px 0;letter-spacing:.06em;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s,padding-left .2s;cursor:pointer}
+.nav-dropdown-menu a:hover{color:var(--gold);padding-left:6px}
+
+/* ============ SISTEMA DE PESTAÑAS ============ */
+.tab-page{display:none}
+.tab-page.active{display:block}
+.nav-tabs{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-tab{font-size:.68rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);cursor:pointer;transition:color .25s;position:relative;padding-bottom:4px;background:none;border:none;font-family:'Inter',sans-serif}
+.nav-tab:hover{color:#fff}
+.nav-tab.active{color:var(--gold)}
+.nav-tab.active::after{content:'';position:absolute;bottom:-8px;left:0;right:0;height:2px;background:var(--gold)}
+
+/* ============ NOSOTROS (equipo + tecnología + por qué + smile line institucional) ============ */
+.nosotros-hero{background:var(--ink);padding:160px 64px 80px;text-align:center}
+.nosotros-hero .sec-h2{color:#fff}
+.team-editorial{background:var(--ink);padding:60px 64px 100px}
+.team-editorial .sec-h2{color:#fff}
+.team-editorial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:56px auto 0}
+.team-ed-card{position:relative;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,#1c1c1c,#0a0a0a);display:flex;align-items:center;justify-content:center}
+.team-ed-card svg{width:80px;height:80px;color:rgba(191,160,84,.3)}
+.team-ed-info{position:absolute;bottom:0;left:0;right:0;padding:26px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.85))}
+.team-ed-name{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;margin-bottom:4px}
+.team-ed-role{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+
+/* ============ COMPARADOR (en pestaña Tratamientos) ============ */
+.comparador-sec{background:var(--ink);padding:96px 80px}
+.comparador-sec .sec-h2{color:#fff}
+.comp2-tabs{display:flex;gap:2px;max-width:900px;margin:48px auto 0;justify-content:center;flex-wrap:wrap}
+.comp2-tab{flex:1;min-width:120px;padding:13px 8px;text-align:center;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);background:rgba(255,255,255,.04);border-bottom:2px solid transparent;cursor:pointer;transition:all .25s}
+.comp2-tab.selected{color:var(--gold);border-color:var(--gold);background:var(--gold-dim)}
+.comp2-table{max-width:900px;margin:2px auto 0;background:rgba(255,255,255,.03);border:1px solid var(--rule)}
+.comp2-row{display:grid;border-bottom:1px solid var(--rule)}
+.comp2-row:last-child{border-bottom:none}
+.comp2-cell{padding:20px 24px;font-size:.8rem;color:rgba(255,255,255,.82);border-right:1px solid var(--rule);line-height:1.6}
+.comp2-cell:last-child{border-right:none}
+.comp2-cell-label{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:block}
+
+/* ============ NETFLIX-STYLE CASOS DENTRO DEL PANEL DE TRATAMIENTO ============ */
+.tp-cases{margin-top:36px}
+.tp-cases-row{display:flex;gap:16px;overflow-x:auto;padding-bottom:12px;scrollbar-width:thin}
+.tp-case-card{flex:0 0 280px;aspect-ratio:16/10;position:relative;border-radius:8px;overflow:hidden;cursor:pointer;background:#111;transition:transform .35s var(--ease),box-shadow .35s var(--ease);box-shadow:0 4px 18px rgba(0,0,0,.18)}
+.tp-case-card:hover{transform:scale(1.03);box-shadow:0 10px 32px rgba(0,0,0,.28)}
+.tp-case-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.tp-case-card:hover img{transform:scale(1.06)}
+.tp-case-card-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,transparent 35%,rgba(0,0,0,.85) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.tp-case-card-play-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px);transition:transform .3s,background .3s}
+.tp-case-card:hover .tp-case-card-play-wrap{transform:translate(-50%,-50%) scale(1.12);background:var(--gold);border-color:var(--gold)}
+.tp-case-card-play-wrap svg{width:18px;height:18px;fill:#fff;margin-left:2px}
+.tp-case-card-name{font-size:.74rem;color:#fff;font-weight:600;letter-spacing:.02em}
+.tp-case-card-play{font-size:.62rem;color:var(--gold-lt);margin-top:3px;letter-spacing:.08em;text-transform:uppercase}
+.tp-cases-note{font-size:.66rem;color:var(--mid);margin-top:10px;font-style:italic}
+
+/* ============ ESTADÍSTICAS (en pestaña Casos) ============ */
+.stats2-sec{background:var(--ink);padding:80px}
+.stats2-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:1000px;margin:0 auto;text-align:center}
+.stat2{padding:0 16px;border-right:1px solid var(--rule)}
+.stat2:last-child{border-right:none}
+.stat2-num{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.4vw,2.8rem);color:var(--gold);font-weight:400;line-height:1}
+.stat2-label{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:10px}
+
+/* ============ SONRISA 3D (placeholder en Inicio) ============ */
+.smile3d-sec{background:#000;padding:96px 80px;text-align:center}
+.smile3d-sec .sec-h2{color:#fff}
+.smile3d-box{max-width:600px;margin:48px auto 0;aspect-ratio:16/10;background:linear-gradient(160deg,#161616,#0a0a0a);border:1px solid var(--rule);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.smile3d-icon{width:64px;height:64px;color:var(--gold);opacity:.6}
+.smile3d-label{font-size:.74rem;color:rgba(255,255,255,.5);max-width:340px;line-height:1.7}
+
+/* ============ WRAPPED WIDGET FLOTANTE ============ */
+.wrapped-fab{position:fixed;bottom:28px;right:28px;z-index:700;background:var(--gold);color:#000;border-radius:30px;padding:14px 22px;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;box-shadow:0 8px 30px rgba(0,0,0,.35);cursor:pointer;transition:transform .25s}
+.wrapped-fab:hover{transform:translateY(-3px)}
+.wrapped-modal-overlay{display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.75);backdrop-filter:blur(6px)}
+.wrapped-modal-overlay.open{display:block}
+.wrapped-modal{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:960;width:min(480px,90vw);background:linear-gradient(160deg,#1a1530,#0a0a0a);border:1px solid var(--rule);border-radius:18px;padding:40px}
+.wrapped-modal.open{display:block}
+.wrapped-modal-close{position:absolute;top:16px;right:18px;color:rgba(255,255,255,.5);font-size:1rem;cursor:pointer}
+.wrapped-q-num2{font-family:monospace;font-size:.62rem;color:var(--gold);letter-spacing:.1em;margin-bottom:16px}
+.wrapped-q-text2{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:24px;line-height:1.3}
+.wrapped-opts2{display:flex;flex-direction:column;gap:8px}
+.wrapped-opt2{padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;font-size:.78rem;color:#fff;text-align:left;cursor:pointer;transition:all .2s}
+.wrapped-opt2:hover{border-color:var(--gold);background:rgba(191,160,84,.1)}
+.wrapped-result2{display:none;text-align:center}
+.wrapped-result2.show{display:block}
+.wrapped-result2-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold);margin:8px 0 14px}
+.wrapped-result2-desc{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:20px}
+.wrapped-restart2{font-size:.64rem;color:var(--gold);text-decoration:underline;cursor:pointer}
+
+@media(max-width:980px){
+  .nav-tabs{display:none}
+  .team-editorial-grid{grid-template-columns:1fr}
+  .stats2-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .stat2{border-right:none;border-bottom:1px solid var(--rule);padding-bottom:16px}
+  .comp2-row{grid-template-columns:1fr!important}
+  .comp2-cell{border-right:none;border-bottom:1px solid var(--rule)}
+}
+
+</style>
+
+</head>
+<body><body>
+
+<div class="tpanel-overlay" id="panel-overlay" onclick="closePanel()"></div>
+<div class="tpanel" id="tp-alineadores"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Smile Line</span><h2 class="tpanel-title">Alineadores Invisibles</h2><p class="tpanel-desc">Los alineadores Smile Line son aparatos removibles y transparentes que corrigen la posición de tus dientes de forma gradual. El tratamiento se planifica digitalmente antes de comenzar.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Primera consulta</div><div class="tp-step-desc">Evaluación clínica y radiográfica. Si ya tenés estudios, traelos.</div><div class="tp-step-price">$20.000 (se descuenta del total)</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Diagnóstico y presupuesto</div><div class="tp-step-desc">Si estás de acuerdo con el plan, avanzás al siguiente paso.</div><div class="tp-step-price">$1.050.000 efectivo</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Escaneo intraoral</div><div class="tp-step-desc">Escaneamos tu boca digitalmente — sin moldes.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">¡Primer alineador!</div><div class="tp-step-desc">Empezás tu tratamiento. Controles cada 20-30 días.</div><div class="tp-step-price">$50.000 por control</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Alineadores%20Invisibles.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">$1.050.000 (efectivo)</div></div><div class="tp-price-item"><div class="tp-price-label">Controles</div><div class="tp-price-val">$50.000/mes</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura el tratamiento?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">En promedio entre 6 y 18 meses según el caso.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Me los puedo sacar?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, son removibles. Se recomienda usarlos 22hs por día.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Duele?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Puede haber leve sensibilidad los primeros días de cada alineador nuevo.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Se nota que los uso?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Son prácticamente invisibles.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-ortodoncia"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Brackets</span><h2 class="tpanel-title">Ortodoncia</h2><p class="tpanel-desc">La ortodoncia con brackets es el tratamiento clásico para corregir la alineación dental. Ofrecemos brackets metálicos y cerámicos adaptados a cada caso.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Primera consulta</div><div class="tp-step-desc">Evaluación clínica y radiográfica completa.</div><div class="tp-step-price">$20.000 (se descuenta del total)</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Diagnóstico</div><div class="tp-step-desc">Definimos el tipo de brackets más adecuado para tu caso.</div><div class="tp-step-price">$1.500.000 promocional efectivo</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Colocación de brackets</div><div class="tp-step-desc">Segunda cita: armado y cementado.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Controles mensuales</div><div class="tp-step-desc">Ajustes cada 30 días.</div><div class="tp-step-price">$50.000 por control</div></div></div></div><div class="tp-warning">⚠️ Contenciones post tratamiento no incluidas.</div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Ortodoncia.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">$1.500.000 promocional (efectivo)</div></div><div class="tp-price-item"><div class="tp-price-label">Controles</div><div class="tp-price-val">$50.000/mes</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Entre 18 meses y 3 años según la complejidad.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Las contenciones están incluidas?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">No, tienen costo independiente.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Metálicos o cerámicos?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Te asesoramos en la consulta según tu caso y preferencia.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Puedo comer de todo?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Algunos alimentos hay que evitarlos. Te damos una guía.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-carillas"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Veneers</span><h2 class="tpanel-title">Carillas Estéticas</h2><p class="tpanel-desc">Las carillas son finas láminas que se colocan sobre la superficie frontal de los dientes. Permiten cambiar forma, tamaño y color con mínima preparación.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Consulta y diagnóstico</div><div class="tp-step-desc">Evaluamos tu sonrisa y definimos el material adecuado.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Diseño de sonrisa</div><div class="tp-step-desc">Planificamos digitalmente el resultado final.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Preparación</div><div class="tp-step-desc">Mínima preparación del esmalte. 1-3 sesiones según material.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Colocación y pulido</div><div class="tp-step-desc">Cementado definitivo y ajuste final.</div><div class="tp-step-price">Incluido</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Carillas%20Estéticas.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según cantidad de piezas y material</div></div><div class="tp-price-item"><div class="tp-price-label">Controles</div><div class="tp-price-val">Resinas c/4-6 meses · Cerámicas c/6 meses</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Resina o cerámica?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Las resinas son más económicas. Las cerámicas más duraderas y naturales.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Duele?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Se realiza con anestesia local.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto duran?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Resinas 5-7 años, cerámicas 15 años o más con cuidados.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Puedo blanquearlas?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">No, el color se define antes de colocarlas.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-blanqueamiento"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Estética</span><h2 class="tpanel-title">Blanqueamiento Dental</h2><p class="tpanel-desc">El blanqueamiento clínico es realizado por especialistas en estética dental. Resultados visibles desde la primera sesión con técnica segura.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Consulta previa</div><div class="tp-step-desc">Evaluamos el estado de tus dientes para confirmar que sos candidato/a.</div><div class="tp-step-price">Consultar</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Protección</div><div class="tp-step-desc">Protegemos encías y tejidos blandos.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Aplicación del gel</div><div class="tp-step-desc">Agente blanqueador activado con luz LED.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Resultado inmediato</div><div class="tp-step-desc">La diferencia se ve desde la primera sesión.</div><div class="tp-step-price">Incluido</div></div></div></div><div class="tp-nota">💜 Para blanqueamiento trabajamos con un equipo especializado. Escribinos al WhatsApp de estética.</div><a href="https://wa.me/5491156656212?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Blanqueamiento%20Dental.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Consultar por WhatsApp</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuántos tonos aclara?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">En promedio entre 4 y 8 tonos.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Duele?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Puede haber sensibilidad temporal que desaparece en 24-48hs.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura el resultado?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Entre 1 y 2 años según hábitos.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Puedo blanquear si tengo carillas?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Las restauraciones no blanquean. Lo evaluamos previamente.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-implantes"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Implantología</span><h2 class="tpanel-title">Implantes Dentales</h2><p class="tpanel-desc">Los implantes dentales son la solución definitiva para reemplazar piezas perdidas. Se colocan en el hueso y actúan como raíz artificial para la corona definitiva.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Consulta y diagnóstico</div><div class="tp-step-desc">Evaluación clínica, radiográfica y de hueso si corresponde.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Fase quirúrgica</div><div class="tp-step-desc">Colocación del implante de titanio. Oseointegración: 3-6 meses.</div><div class="tp-step-price">Incluido en presupuesto</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Oseointegración</div><div class="tp-step-desc">El implante se funde con el hueso durante la cicatrización.</div><div class="tp-step-price">Sin costo adicional</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Fase protésica</div><div class="tp-step-desc">Colocación del pilar y la corona definitiva.</div><div class="tp-step-price">Incluido en presupuesto</div></div></div></div><div class="tp-warning">⚠️ El día de la cirugía concurrí acompañado/a.</div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Implantes%20Dentales.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según caso clínico</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Duele la cirugía?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Se hace con anestesia local. El post-op es manejable con analgésicos.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura el proceso?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Entre 4 y 8 meses en total.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Con poco hueso puedo tener implantes?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">En muchos casos sí, con injerto óseo previo.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto duran?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Con buena higiene y controles, pueden durar toda la vida.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-cirugias"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Cirugía</span><h2 class="tpanel-title">Cirugías Dentales</h2><p class="tpanel-desc">Realizamos extracciones de distintos grados: simples, complejas y cirugías de muelas del juicio o cordales incluidas.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Consulta y diagnóstico</div><div class="tp-step-desc">Evaluación clínica y radiográfica del diente a extraer.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Planificación</div><div class="tp-step-desc">Definimos el tipo de extracción y el protocolo quirúrgico.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Intervención</div><div class="tp-step-desc">Bajo anestesia local. Duración según complejidad.</div><div class="tp-step-price">Incluido en presupuesto</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Postoperatorio</div><div class="tp-step-desc">Indicaciones detalladas de cuidados y medicación.</div><div class="tp-step-price">Sin costo</div></div></div></div><div class="tp-warning">⚠️ Concurrí acompañado/a el día de la intervención.</div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Cirugías%20Dentales.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según complejidad</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Duele?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Se realiza con anestesia local.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto tarda en sanar?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Cicatrización inicial 7-10 días.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuándo puedo comer?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Alimentos blandos y fríos las primeras 24-48hs.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Me van a internar?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">No, es ambulatoria. Hay que ir acompañado/a.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-general"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Prevención</span><h2 class="tpanel-title">Odontología General</h2><p class="tpanel-desc">Realizamos controles periódicos, limpiezas profesionales y tratamiento de caries para mantener tu boca sana.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Consulta diagnóstico</div><div class="tp-step-desc">Revisación completa y detección de caries.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Limpieza profesional</div><div class="tp-step-desc">Remoción de sarro y placa bacteriana.</div><div class="tp-step-price">Incluido o según caso</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Tratamiento de caries</div><div class="tp-step-desc">Restauración con composite del color del diente.</div><div class="tp-step-price">Según cantidad</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Plan de controles</div><div class="tp-step-desc">Frecuencia personalizada de controles.</div><div class="tp-step-price">Sin costo</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Odontología%20General.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según tratamiento</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cada cuánto debo hacerme limpieza?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Cada 6 meses como mínimo.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿La obturación duele?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Se realiza con anestesia local.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Qué pasa si no trato una caries?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Puede avanzar y necesitar conducto o extracción.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura para obra social?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, emitimos factura para solicitar reintegro.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-restauradora"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Restauraciones</span><h2 class="tpanel-title">Odontología Restauradora</h2><p class="tpanel-desc">Recuperamos dientes dañados por caries, fracturas o desgaste con materiales de última generación para resultados estéticos y duraderos.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Diagnóstico</div><div class="tp-step-desc">Evaluamos el diente y definimos el tipo de restauración.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Preparación</div><div class="tp-step-desc">Remoción del tejido dañado y preparación de la cavidad.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Restauración</div><div class="tp-step-desc">Colocación del material restaurador.</div><div class="tp-step-price">Según caso</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Pulido y ajuste</div><div class="tp-step-desc">Pulido final y verificación de oclusión.</div><div class="tp-step-price">Incluido</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Odontología%20Restauradora.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según caso</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Qué es una restauración Clase I-V?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Son clasificaciones según ubicación y extensión de la caries.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura el composite?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Entre 5 y 10 años con buena higiene.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Se nota la restauración?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Usamos composite del color de tu diente.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, podés solicitar reintegro a tu obra social.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-periodoncia"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Encías</span><h2 class="tpanel-title">Periodoncia</h2><p class="tpanel-desc">La periodoncia se ocupa de la salud de las encías y el hueso que sostiene los dientes. El tratamiento a tiempo puede prevenir la pérdida dental.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Diagnóstico periodontal</div><div class="tp-step-desc">Evaluación de encías, medición de bolsas y análisis radiográfico.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Raspaje y alisado</div><div class="tp-step-desc">Limpieza profunda bajo la línea de encía.</div><div class="tp-step-price">Incluido en presupuesto</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Reevaluación</div><div class="tp-step-desc">A las 4-6 semanas evaluamos la respuesta.</div><div class="tp-step-price">Sin costo</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Cirugía periodontal</div><div class="tp-step-desc">En casos avanzados puede ser necesaria.</div><div class="tp-step-price">Según caso</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Periodoncia.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según caso clínico</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cómo sé si tengo periodontitis?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Síntomas: encías que sangran, mal aliento, dientes que se mueven.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Tiene cura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Se puede controlar y detener su avance.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Duele el raspaje?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Se realiza con anestesia local.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, para reintegro de obra social.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-endodoncia"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Conducto</span><h2 class="tpanel-title">Endodoncia</h2><p class="tpanel-desc">La endodoncia permite salvar un diente con la pulpa comprometida. Se realiza bajo anestesia local y es prácticamente indoloro.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Diagnóstico</div><div class="tp-step-desc">Evaluación clínica y radiográfica.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Acceso y limpieza</div><div class="tp-step-desc">Remoción de la pulpa afectada.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Obturación</div><div class="tp-step-desc">Sellado de los conductos con material biocompatible.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Restauración definitiva</div><div class="tp-step-desc">El diente requiere corona o restauración post conducto.</div><div class="tp-step-price">A presupuestar</div></div></div></div><div class="tp-warning">⚠️ Una vez finalizado, el diente requiere corona o restauración definitiva (costo independiente).</div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Endodoncia.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según cantidad de raíces</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Duele?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">El mito del dolor es exagerado — con anestesia local es tolerable.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuántas sesiones?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">En general 1 a 3 según complejidad.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Por qué necesito corona después?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">El diente queda más frágil y la corona lo protege.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, para reintegro de obra social.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-placas"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Bruxismo</span><h2 class="tpanel-title">Placas Dentales</h2><p class="tpanel-desc">Fabricamos placas dentales a medida para proteger de bruxismo, mantener resultados ortodóncicos o proteger en deportes.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Consulta</div><div class="tp-step-desc">Evaluamos tu necesidad y definimos el tipo de placa.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Registro de mordida</div><div class="tp-step-desc">Toma de impresión o escaneo digital.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Fabricación</div><div class="tp-step-desc">La placa se confecciona en laboratorio especializado.</div><div class="tp-step-price">Incluido en presupuesto</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Entrega y ajuste</div><div class="tp-step-desc">Probamos y ajustamos para máxima comodidad.</div><div class="tp-step-price">Incluido</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Placas%20Dentales.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según tipo</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura una placa?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Entre 3 y 5 años con buen cuidado.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cómo la limpio?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Con cepillo suave y agua fría.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cura el bruxismo?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">No lo cura pero protege los dientes del desgaste.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, podés solicitar reintegro.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-protesis-fija"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Coronas · Puentes</span><h2 class="tpanel-title">Prótesis Fija</h2><p class="tpanel-desc">La prótesis fija incluye coronas, puentes e incrustaciones que se cementan y no se retiran, devolviendo función y estética de forma permanente.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Diagnóstico</div><div class="tp-step-desc">Evaluamos el diente y definimos el tipo de restauración.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Preparación dentaria</div><div class="tp-step-desc">Tallado del diente para recibir la corona o puente.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Provisorio</div><div class="tp-step-desc">Restauración provisoria mientras se fabrica la definitiva.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Colocación definitiva</div><div class="tp-step-desc">Cementado con ajuste de oclusión.</div><div class="tp-step-price">Incluido en presupuesto</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Prótesis%20Fija.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según caso</div></div><div class="tp-price-item"><div class="tp-price-label">Controles</div><div class="tp-price-val">Controles cada 6 meses</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura una corona?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Con cuidados entre 10 y 20 años.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Qué materiales usan?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Zirconio, porcelana sobre metal o metal según el caso.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cómo la cuido?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Igual que tus dientes: cepillado, hilo dental y controles.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, para reintegro de obra social.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-protesis-removible"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">PPR · PTR</span><h2 class="tpanel-title">Prótesis Removible</h2><p class="tpanel-desc">La prótesis removible reemplaza uno o varios dientes y se puede retirar para higiene. Ofrecemos PPR, PTR, estructura metálica e híbrida.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Diagnóstico</div><div class="tp-step-desc">Evaluación clínica y definición del tipo de prótesis.</div><div class="tp-step-price">$20.000</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Impresiones</div><div class="tp-step-desc">Toma de modelos para el laboratorio.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Pruebas</div><div class="tp-step-desc">Prueba de dientes y estructura antes de terminar.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Entrega y ajuste</div><div class="tp-step-desc">Prótesis terminada con ajustes necesarios.</div><div class="tp-step-price">Incluido en presupuesto</div></div></div></div><a href="https://wa.me/5491166431743?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Prótesis%20Removible.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Reserva de turno</div><div class="tp-price-val">$20.000</div></div><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Según caso</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto tarda la adaptación?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">2 a 4 semanas. Al principio puede molestar un poco.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cómo la limpio?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Con cepillo y jabón neutro fuera de la boca.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Cuánto dura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Entre 5 y 10 años según uso y cambios en la boca.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Sí, para reintegro de obra social.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div><div class="tpanel" id="tp-estetica-facial"><div class="tpanel-inner"><button class="tpanel-close" onclick="closePanel()">✕ Cerrar</button><span class="tpanel-badge">Facial</span><h2 class="tpanel-title">Estética Facial</h2><p class="tpanel-desc">Trabajamos con un equipo especializado en estética facial para complementar y armonizar los resultados dentales con el resto del rostro.</p><div class="tpanel-grid"><div class="tpanel-left"><div class="tpanel-section-title">Proceso del tratamiento</div><div class="tp-steps"><div class="tp-step"><div class="tp-step-num">01</div><div class="tp-step-body"><div class="tp-step-name">Consulta</div><div class="tp-step-desc">Evaluación facial y definición del plan de tratamiento.</div><div class="tp-step-price">Consultar</div></div></div><div class="tp-step"><div class="tp-step-num">02</div><div class="tp-step-body"><div class="tp-step-name">Planificación</div><div class="tp-step-desc">Diseñamos el tratamiento de forma personalizada.</div><div class="tp-step-price">Incluido</div></div></div><div class="tp-step"><div class="tp-step-num">03</div><div class="tp-step-body"><div class="tp-step-name">Procedimiento</div><div class="tp-step-desc">Realizado por especialistas en estética facial.</div><div class="tp-step-price">Según tratamiento</div></div></div><div class="tp-step"><div class="tp-step-num">04</div><div class="tp-step-body"><div class="tp-step-name">Seguimiento</div><div class="tp-step-desc">Controles y mantenimiento según el tratamiento.</div><div class="tp-step-price">Consultar</div></div></div></div><div class="tp-nota">💜 Para estética facial trabajamos con un equipo especializado. Escribinos al WhatsApp de estética.</div><a href="https://wa.me/5491156656212?text=Hola!%20Me%20interesa%20el%20tratamiento%20de%20Estética%20Facial.%20Me%20pueden%20dar%20más%20información?" target="_blank" class="tp-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Consultar por WhatsApp</a><a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="tp-btn-reserva">Reservar consulta →</a></div><div class="tpanel-right"><div class="tpanel-section-title">Precios</div><div class="tp-prices"><div class="tp-price-item"><div class="tp-price-label">Tratamiento</div><div class="tp-price-val">Consultar por WhatsApp</div></div></div><div class="tp-payment"><div class="tp-payment-title">Métodos de pago</div><div class="tp-payment-item">💵 Efectivo</div><div class="tp-payment-item">🔁 Transferencia <span class="tp-tag">+10%</span></div><div class="tp-payment-item">💳 Tarjeta crédito <span class="tp-tag">+20%</span></div><div class="tp-payment-item">🏦 BBVA — 3 cuotas sin interés (viernes y sábados)</div><div class="tp-payment-alias">Alias: <strong>biodesign.arg</strong></div></div><div class="tpanel-section-title" style="margin-top:28px">Preguntas frecuentes</div><div class="tp-faqs"><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Qué tratamientos ofrecen?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Consultanos por WhatsApp para conocer el menú completo.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Dónde atienden?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">El servicio de estética tiene atención en Palomar.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Tienen Instagram?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Próximamente confirmamos el Instagram de estética.</div></div><div class="tp-faq" onclick="toggleFaq(this)"><div class="tp-faq-q">¿Emiten factura?<span class="tp-faq-icon">+</span></div><div class="tp-faq-a">Consultanos por WhatsApp para más información.</div></div><div class="tp-cases"><div class="tpanel-section-title" style="margin-top:8px">Casos relacionados</div><div class="tp-cases-row">
+<div class="tp-case-card"><img data-case-img="0" alt="Caso 1"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="1" alt="Caso 2"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+<div class="tp-case-card"><img data-case-img="2" alt="Caso 3"><div class="tp-case-card-play-wrap"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="tp-case-card-overlay"><div class="tp-case-card-name">Caso real</div><div class="tp-case-card-play">Ver video</div></div></div>
+</div><p class="tp-cases-note">* Imágenes ilustrativas — próximamente videos y renders reales de este tratamiento</p></div></div></div></div></div></div>
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo" onclick="switchTab('inicio');return false;">
+    <img src="images/01-biodesign-logo.jpg" alt="Biodesign logo">
+    <div><span class="nav-logo-name">BIODESIGN</span><span class="nav-logo-sub">Odontología &amp; Estética</span></div>
+  </a>
+  <ul class="nav-tabs">
+    <li><button class="nav-tab active" data-tab="inicio" onclick="switchTab('inicio')">Inicio</button></li>
+    <li><button class="nav-tab" data-tab="tratamientos" onclick="switchTab('tratamientos')">Tratamientos</button></li>
+    <li><button class="nav-tab" data-tab="nosotros" onclick="switchTab('nosotros')">Nosotros</button></li>
+    <li><button class="nav-tab" data-tab="casos" onclick="switchTab('casos')">Casos</button></li>
+  </ul>
+  <a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="cta" style="border:1px solid var(--gold);color:var(--gold);padding:9px 20px;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;transition:all .25s">Reservar consulta</a>
+</nav>
+
+<div class="tab-page active" id="tab-inicio">
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-kicker" data-reveal>Caballito · Canning · Buenos Aires</p>
+    <h1 class="hero-h1" data-reveal="1">Tu sonrisa<br><span class="gw">perfecta</span></h1>
+    <p class="hero-subtitle" data-reveal="2">Donde la estética y la tecnología<br>se encuentran</p>
+    <p class="hero-body" data-reveal="3">Cada sonrisa es única. Combinamos experiencia clínica, tecnología digital y atención completamente personalizada para resultados naturales y duraderos.</p>
+    <div class="hero-actions" data-reveal="4">
+      <a href="https://agendamiento.reservo.cl/makereserva/agenda/50LDIr1030lVV93n7x79caV021814i" target="_blank" class="btn-fill">Reservar consulta</a>
+      <a href="#" class="btn-line" onclick="switchTab('tratamientos');return false;">Ver tratamientos</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-photo" src="images/02-biodesign.jpg" alt="Biodesign">
+    <div class="hero-pills">
+      <div class="hero-pill" data-reveal="3"><span class="hero-pill-num">+5K</span><span class="hero-pill-lbl">Sonrisas<br>transformadas</span></div>
+      <div class="hero-pill" data-reveal="4"><span class="hero-pill-num">10+</span><span class="hero-pill-lbl">Años de<br>experiencia</span></div>
+    </div>
+  </div>
+</section>
+<section id="smileline" class="smileline">
+  <div class="smileline-left">
+    <span class="smileline-badge">Tecnología exclusiva</span>
+    <h2 class="smileline-h">SMILE LINE<br><i>Alineadores Invisibles</i></h2>
+    <p class="smileline-sub" data-reveal>Tratamientos personalizados, cómodos y estéticos para corregir tu sonrisa sin brackets. Diseñados digitalmente para cada paciente.</p>
+    <ul class="smileline-checks" data-reveal="1">
+      <li>Invisibles y removibles</li><li>Diseño 3D completamente personalizado</li>
+      <li>Sin urgencias ni emergencias</li><li>Resultados predecibles antes de comenzar</li>
+      <li>Laboratorio propio Smile Line</li>
+    </ul>
+    <a href="https://wa.me/5491166431743" target="_blank" class="btn-fill" data-reveal="2" style="width:fit-content">Quiero evaluar mi sonrisa →</a>
+  </div>
+  <div class="smileline-right"><img class="smileline-img" src="images/03-alineador-smile-line.jpg" alt="Alineador Smile Line"></div>
+</section>
+<section class="pasos" id="pasos">
+  <h2 class="pasos-title" data-reveal>Tu nueva sonrisa en 4 pasos</h2>
+  <div class="pasos-grid">
+    <div class="paso" data-reveal><span class="paso-num">01</span><div class="paso-img-wrap"><img class="paso-img" src="images/04-escaner.jpg" alt="Escáner"></div><div class="paso-line"></div><span class="paso-name">Escaneo Digital</span><p class="paso-desc">Escaneamos tu boca sin moldes, rápido y preciso.</p><span class="paso-arrow">→</span></div>
+    <div class="paso" data-reveal="1"><span class="paso-num">02</span><div class="paso-img-wrap"><img class="paso-img" src="images/05-planificacion.jpg" alt="Planificación"></div><div class="paso-line"></div><span class="paso-name">Planificación</span><p class="paso-desc">Diseñamos digitalmente tu tratamiento para predecir el resultado.</p><span class="paso-arrow">→</span></div>
+    <div class="paso" data-reveal="2"><span class="paso-num">03</span><div class="paso-img-wrap"><img class="paso-img" src="images/06-fabricacion.jpg" alt="Fabricación"></div><div class="paso-line"></div><span class="paso-name">Fabricación</span><p class="paso-desc">Producimos tus alineadores con la más alta tecnología.</p><span class="paso-arrow">→</span></div>
+    <div class="paso" data-reveal="3"><span class="paso-num">04</span><div class="paso-img-wrap"><img class="paso-img" src="images/07-resultado.jpg" alt="Resultado"></div><div class="paso-line"></div><span class="paso-name">Resultado</span><p class="paso-desc">Seguimiento profesional y evolución constante.</p></div>
+  </div>
+</section>
+
+<section class="smile3d-sec">
+  <div class="sec-eyebrow" style="justify-content:center" data-reveal>Próximamente</div>
+  <h2 class="sec-h2" data-reveal="1">Explorá tu sonrisa <i>en 3D</i></h2>
+  <div class="smile3d-box" data-reveal="2">
+    <svg class="smile3d-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M8 20Q8 8 20 8Q32 8 32 20Q32 32 20 32Q8 32 8 20Z"/><path d="M14 18Q20 14 26 18M14 23Q20 27 26 23"/></svg>
+    <p class="smile3d-label">Experiencia interactiva en desarrollo — vas a poder explorar un modelo 3D de boca y tocar cada zona para descubrir soluciones personalizadas.</p>
+  </div>
+</section>
+<section id="porque" class="porque">
+  <div data-reveal><div class="sec-eyebrow">Nuestra diferencia</div><h2 class="sec-h2 sec-h2--light">¿Por qué elegir<br><i>Biodesign?</i></h2></div>
+  <div class="porque-grid">
+    <div class="pitem" data-reveal><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="14" r="7"/><path d="M5 37Q5 27 20 27Q35 27 35 37"/></svg><div class="pitem-name">Atención<br>personalizada</div></div>
+    <div class="pitem" data-reveal="1"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="8" width="22" height="16" rx="2"/><line x1="27" y1="13" x2="35" y2="13"/><line x1="27" y1="19" x2="35" y2="19"/><line x1="8" y1="32" x2="32" y2="32"/></svg><div class="pitem-name">Tecnología<br>digital</div></div>
+    <div class="pitem" data-reveal="2"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="5" width="30" height="30" rx="2"/><path d="M5 15H35"/><path d="M15 5V15"/><path d="M25 5V15"/></svg><div class="pitem-name">Laboratorio<br>propio</div></div>
+    <div class="pitem" data-reveal="3"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="13" r="7"/><path d="M8 37Q8 27 20 27Q32 27 32 37"/></svg><div class="pitem-name">Profesionales<br>especializados</div></div>
+    <div class="pitem" data-reveal="4"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M10 21L17 28L30 13"/><circle cx="20" cy="20" r="15"/></svg><div class="pitem-name">Seguimiento<br>continuo</div></div>
+    <div class="pitem" data-reveal="5"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="15"/><path d="M12 20Q16 14 20 20Q24 26 28 20"/></svg><div class="pitem-name">Resultados<br>naturales</div></div>
+  </div>
+</section>
+<section id="sedes" class="sedes">
+  <div style="text-align:center" data-reveal>
+    <div class="sec-eyebrow" style="justify-content:center"><span style="width:26px;height:1px;background:var(--gold);display:block"></span>Dónde encontrarnos<span style="width:26px;height:1px;background:var(--gold);display:block"></span></div>
+    <h2 class="sec-h2">Nuestras <i>sedes</i></h2>
+  </div>
+  <div class="sedes-grid">
+    <div class="scard" data-reveal>
+      <iframe class="scard-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.996!2d-58.46744!3d-34.62020!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPáez+2451+Caballito!5e0!3m2!1ses!2sar!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Biodesign Caballito"></iframe>
+      <div class="scard-body"><div class="scard-badge">Sede Principal</div><div class="scard-name">Biodesign Caballito</div><div class="scard-addr">Páez 2451, Caballito<br>Buenos Aires</div><div class="scard-btns"><a href="https://wa.me/5491166431743" class="btn-dark" target="_blank">WhatsApp ↗</a><a href="https://maps.google.com/?q=-34.620201,-58.467445" class="btn-ghost" target="_blank">Cómo llegar</a></div></div>
+    </div>
+    <div class="scard" data-reveal="1">
+      <iframe class="scard-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.5!2d-58.51!3d-34.88!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAv+Mariano+Castex+1140+Canning!5e0!3m2!1ses!2sar!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Biodesign Canning"></iframe>
+      <div class="scard-body"><div class="scard-badge">Sede GBA</div><div class="scard-name">Biodesign Canning</div><div class="scard-addr">Av. Mariano Castex 1140, Piso 6<br>Canning, Buenos Aires</div><div class="scard-btns"><a href="https://wa.me/5491166431743" class="btn-dark" target="_blank">WhatsApp ↗</a><a href="https://maps.app.goo.gl/NskRMex3UUqZsKFZ9" class="btn-ghost" target="_blank">Cómo llegar</a></div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tab-page" id="tab-tratamientos">
+<section id="tratamientos" class="trat-section">
+  <div class="trat-intro" data-reveal>
+    <div><div class="sec-eyebrow">Nuestros servicios</div><h2 class="sec-h2">Tratamientos<br><i>destacados</i></h2></div>
+    <a href="https://wa.me/5491166431743" target="_blank" class="btn-fill" style="justify-self:end;align-self:end">Consultar ahora</a>
+  </div>
+  <div class="trat-grid"><div class="trat-card" data-reveal onclick="openPanel('alineadores')"><img class="trat-card-img" src="images/08-alineadores-invisibles.jpg" alt="Alineadores Invisibles"><div class="trat-card-body"><div class="trat-card-badge">Smile Line</div><div class="trat-card-name">Alineadores Invisibles</div><div class="trat-card-line"></div><div class="trat-card-desc">Corregí tu sonrisa de forma cómoda, estética y predecible con tecnología Smile Line.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="1" onclick="openPanel('ortodoncia')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Ortodoncia"><div class="trat-card-body"><div class="trat-card-badge">Brackets</div><div class="trat-card-name">Ortodoncia</div><div class="trat-card-line"></div><div class="trat-card-desc">Brackets metálicos y cerámicos para corregir la posición de tus dientes.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="2" onclick="openPanel('carillas')"><img class="trat-card-img" src="images/10-carillas-esteticas.jpg" alt="Carillas Estéticas"><div class="trat-card-body"><div class="trat-card-badge">Veneers</div><div class="trat-card-name">Carillas Estéticas</div><div class="trat-card-line"></div><div class="trat-card-desc">Laminados de porcelana o resina para transformar tu sonrisa con mínima intervención.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="3" onclick="openPanel('blanqueamiento')"><img class="trat-card-img" src="images/11-blanqueamiento-dental.jpg" alt="Blanqueamiento Dental"><div class="trat-card-body"><div class="trat-card-badge">Estética</div><div class="trat-card-name">Blanqueamiento Dental</div><div class="trat-card-line"></div><div class="trat-card-desc">Protocolo profesional para una sonrisa notablemente más luminosa y uniforme.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="4" onclick="openPanel('implantes')"><img class="trat-card-img" src="images/12-implantes-dentales.jpg" alt="Implantes Dentales"><div class="trat-card-body"><div class="trat-card-badge">Implantología</div><div class="trat-card-name">Implantes Dentales</div><div class="trat-card-line"></div><div class="trat-card-desc">Recuperá la funcionalidad y estética con implantes de titanio de alta precisión.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="5" onclick="openPanel('cirugias')"><img class="trat-card-img" src="images/13-cirugias-dentales.jpg" alt="Cirugías Dentales"><div class="trat-card-body"><div class="trat-card-badge">Cirugía</div><div class="trat-card-name">Cirugías Dentales</div><div class="trat-card-line"></div><div class="trat-card-desc">Extracciones simples y complejas realizadas con el máximo cuidado.</div><span class="trat-card-link">Ver detalles →</span></div></div></div>
+  <div class="mas-toggle"><button class="mas-btn" onclick="toggleMas(this)">+ Ver más tratamientos</button></div>
+  <div class="mas-grid" id="mas-grid"><div class="trat-card" data-reveal onclick="openPanel('general')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Odontología General"><div class="trat-card-body"><div class="trat-card-badge">Prevención</div><div class="trat-card-name">Odontología General</div><div class="trat-card-line"></div><div class="trat-card-desc">Limpieza, diagnóstico y tratamiento de caries. La base de tu salud bucal.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="1" onclick="openPanel('restauradora')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Odontología Restauradora"><div class="trat-card-body"><div class="trat-card-badge">Restauraciones</div><div class="trat-card-name">Odontología Restauradora</div><div class="trat-card-line"></div><div class="trat-card-desc">Restauraciones estéticas y funcionales para recuperar tus dientes dañados.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="2" onclick="openPanel('periodoncia')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Periodoncia"><div class="trat-card-body"><div class="trat-card-badge">Encías</div><div class="trat-card-name">Periodoncia</div><div class="trat-card-line"></div><div class="trat-card-desc">Tratamiento de gingivitis, periodontitis y cirugía periodontal.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="3" onclick="openPanel('endodoncia')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Endodoncia"><div class="trat-card-body"><div class="trat-card-badge">Conducto</div><div class="trat-card-name">Endodoncia</div><div class="trat-card-line"></div><div class="trat-card-desc">Tratamiento de conducto con anestesia local para salvar tu diente.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="4" onclick="openPanel('placas')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Placas Dentales"><div class="trat-card-body"><div class="trat-card-badge">Bruxismo</div><div class="trat-card-name">Placas Dentales</div><div class="trat-card-line"></div><div class="trat-card-desc">Contenciones, placa de bruxismo y placa deportiva a medida.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="5" onclick="openPanel('protesis-fija')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Prótesis Fija"><div class="trat-card-body"><div class="trat-card-badge">Coronas · Puentes</div><div class="trat-card-name">Prótesis Fija</div><div class="trat-card-line"></div><div class="trat-card-desc">Coronas, puentes e incrustaciones para restaurar dientes dañados o ausentes.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="6" onclick="openPanel('protesis-removible')"><img class="trat-card-img" src="images/09-ortodoncia.jpg" alt="Prótesis Removible"><div class="trat-card-body"><div class="trat-card-badge">PPR · PTR</div><div class="trat-card-name">Prótesis Removible</div><div class="trat-card-line"></div><div class="trat-card-desc">Prótesis parcial o total removible, estructura metálica o híbrida.</div><span class="trat-card-link">Ver detalles →</span></div></div><div class="trat-card" data-reveal="7" onclick="openPanel('estetica-facial')"><img class="trat-card-img" src="images/13-cirugias-dentales.jpg" alt="Estética Facial"><div class="trat-card-body"><div class="trat-card-badge">Facial</div><div class="trat-card-name">Estética Facial</div><div class="trat-card-line"></div><div class="trat-card-desc">Tratamientos estéticos faciales para una armonía total con tu sonrisa.</div><span class="trat-card-link">Ver detalles →</span></div></div></div>
+</section>
+
+<section class="comparador-sec">
+  <div style="text-align:center">
+    <div class="sec-eyebrow" style="justify-content:center" data-reveal>Elegí informado</div>
+    <h2 class="sec-h2" style="color:#fff" data-reveal="1">Comparador <i>inteligente</i></h2>
+    <p style="font-size:.84rem;color:rgba(255,255,255,.6);margin-top:14px" data-reveal="2">Tocá dos tratamientos para comparar lado a lado.</p>
+  </div>
+  <div class="comp2-tabs" data-reveal="3">
+    <div class="comp2-tab selected" data-comp="alineadores" onclick="toggleComp2(this)">Alineadores</div>
+    <div class="comp2-tab" data-comp="brackets" onclick="toggleComp2(this)">Brackets</div>
+    <div class="comp2-tab selected" data-comp="carillas" onclick="toggleComp2(this)">Carillas</div>
+    <div class="comp2-tab" data-comp="implantes" onclick="toggleComp2(this)">Implantes</div>
+  </div>
+  <div class="comp2-table" id="comp2-table"></div>
+</section>
+</div>
+
+<div class="tab-page" id="tab-nosotros">
+
+<section class="nosotros-hero">
+  <div class="sec-eyebrow" style="justify-content:center">Conocé Biodesign</div>
+  <h2 class="sec-h2">Nosotros</h2>
+</section>
+<section class="team-editorial">
+  <div class="sec-eyebrow" data-reveal>Las personas detrás</div>
+  <h2 class="sec-h2" data-reveal="1">Nuestro <i>equipo</i></h2>
+  <div class="team-editorial-grid">
+    <div class="team-ed-card" data-reveal="2">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="14" r="7"/><path d="M5 37Q5 27 20 27Q35 27 35 37"/></svg>
+      <div class="team-ed-info"><div class="team-ed-name">Equipo Odontología</div><div class="team-ed-role">Restauradora &amp; Estética</div></div>
+    </div>
+    <div class="team-ed-card" data-reveal="3">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="14" r="7"/><path d="M5 37Q5 27 20 27Q35 27 35 37"/></svg>
+      <div class="team-ed-info"><div class="team-ed-name">Equipo Smile Line</div><div class="team-ed-role">Ortodoncia Digital</div></div>
+    </div>
+    <div class="team-ed-card" data-reveal="4">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="14" r="7"/><path d="M5 37Q5 27 20 27Q35 27 35 37"/></svg>
+      <div class="team-ed-info"><div class="team-ed-name">Equipo Estética Facial</div><div class="team-ed-role">Armonización Facial</div></div>
+    </div>
+  </div>
+</section>
+<section id="digital" class="digital">
+  <div class="digital-inner">
+    <div>
+      <div class="sec-eyebrow" data-reveal>Infraestructura</div>
+      <h2 class="sec-h2" data-reveal="1">Odontología<br><i>Digital</i></h2>
+      <p class="digital-body" data-reveal="2">La tecnología de punta nos permite lograr tratamientos más precisos, cómodos y con resultados predecibles.</p>
+      <div class="digital-items" data-reveal="3">
+        <div class="ditem"><div class="ditem-name">Escáner Intraoral</div><div class="ditem-desc">Sin moldes, lectura precisa en minutos</div></div>
+        <div class="ditem"><div class="ditem-name">Diseño 3D</div><div class="ditem-desc">Planificación digital antes de iniciar</div></div>
+        <div class="ditem"><div class="ditem-name">Impresión 3D</div><div class="ditem-desc">Laboratorio propio Smile Line</div></div>
+        <div class="ditem"><div class="ditem-name">Radiología Digital</div><div class="ditem-desc">Diagnóstico preciso, mínima radiación</div></div>
+      </div>
+    </div>
+    <img class="digital-photo" src="images/14-tecnologia-digital.jpg" alt="Tecnología digital" data-reveal="2">
+  </div>
+</section>
+<section id="porque" class="porque">
+  <div data-reveal><div class="sec-eyebrow">Nuestra diferencia</div><h2 class="sec-h2 sec-h2--light">¿Por qué elegir<br><i>Biodesign?</i></h2></div>
+  <div class="porque-grid">
+    <div class="pitem" data-reveal><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="14" r="7"/><path d="M5 37Q5 27 20 27Q35 27 35 37"/></svg><div class="pitem-name">Atención<br>personalizada</div></div>
+    <div class="pitem" data-reveal="1"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="8" width="22" height="16" rx="2"/><line x1="27" y1="13" x2="35" y2="13"/><line x1="27" y1="19" x2="35" y2="19"/><line x1="8" y1="32" x2="32" y2="32"/></svg><div class="pitem-name">Tecnología<br>digital</div></div>
+    <div class="pitem" data-reveal="2"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="5" width="30" height="30" rx="2"/><path d="M5 15H35"/><path d="M15 5V15"/><path d="M25 5V15"/></svg><div class="pitem-name">Laboratorio<br>propio</div></div>
+    <div class="pitem" data-reveal="3"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="13" r="7"/><path d="M8 37Q8 27 20 27Q32 27 32 37"/></svg><div class="pitem-name">Profesionales<br>especializados</div></div>
+    <div class="pitem" data-reveal="4"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M10 21L17 28L30 13"/><circle cx="20" cy="20" r="15"/></svg><div class="pitem-name">Seguimiento<br>continuo</div></div>
+    <div class="pitem" data-reveal="5"><svg class="pitem-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="15"/><path d="M12 20Q16 14 20 20Q24 26 28 20"/></svg><div class="pitem-name">Resultados<br>naturales</div></div>
+  </div>
+</section>
+</div>
+
+<div class="tab-page" id="tab-casos">
+<section id="casos" class="casos">
+  <div class="casos-top" data-reveal>
+    <div><div class="sec-eyebrow">Resultados reales</div><h2 class="sec-h2 sec-h2--light">CASOS REALES</h2></div>
+  </div>
+  <div class="casos-tabs" data-reveal="1">
+    <button class="caso-tab on" onclick="switchCaso(0,this)">ALINEADORES</button>
+    <button class="caso-tab" onclick="switchCaso(1,this)">CARILLAS</button>
+    <button class="caso-tab" onclick="switchCaso(2,this)">IMPLANTES</button>
+    <button class="caso-tab" onclick="switchCaso(3,this)">REHABILITACIÓN</button>
+    <button class="caso-tab" onclick="switchCaso(4,this)">BLANQUEAMIENTO</button>
+  </div>
+  <div class="casos-frame ba-slider" data-reveal="2" id="ba-slider">
+    <img id="caso-img-before" class="ba-img ba-img-before" src="" alt="Antes">
+    <div class="ba-after-wrap" id="ba-after-wrap">
+      <img id="caso-img-after" class="ba-img ba-img-after" src="" alt="Después">
+    </div>
+    <div class="ba-handle" id="ba-handle">
+      <div class="ba-handle-line"></div>
+      <div class="ba-handle-grip">⇔</div>
+    </div>
+    <span class="lbl lbl-a">ANTES</span><span class="lbl lbl-d">DESPUÉS</span>
+  </div>
+  <p class="ba-note">* Imagen de muestra — reemplazá por fotos reales de antes/después de cada caso</p>
+</section>
+
+<section class="stats2-sec">
+  <div class="stats2-grid">
+    <div class="stat2" data-reveal><div class="stat2-num" data-count2="5000">0</div><div class="stat2-label">Pacientes tratados</div></div>
+    <div class="stat2" data-reveal="1"><div class="stat2-num" data-count2="5" data-decimal2="1">0</div><div class="stat2-label">Rating Google</div></div>
+    <div class="stat2" data-reveal="2"><div class="stat2-num" data-count2="10">0</div><div class="stat2-label">Años de experiencia</div></div>
+    <div class="stat2" data-reveal="3"><div class="stat2-num" data-count2="8000">0</div><div class="stat2-label">Tratamientos realizados</div></div>
+  </div>
+</section>
+<section class="reviews">
+  <div class="reviews-header" data-reveal>
+    <div><div class="sec-eyebrow">Testimonios</div><h2 class="sec-h2">Lo que dicen<br><i>nuestros pacientes</i></h2></div>
+    <div class="reviews-badge">★★★★★ &nbsp;Google Reviews · 5.0</div>
+  </div>
+  <div class="reviews-grid">
+    <div class="rcard" data-reveal><div class="rcard-stars">★★★★★</div><p class="rcard-q">"Una experiencia increíble. El equipo es profesional y el resultado superó mis expectativas."</p><div class="rcard-name">Martina G.</div><div class="rcard-src">Google</div></div>
+    <div class="rcard" data-reveal="1"><div class="rcard-stars">★★★★★</div><p class="rcard-q">"Me hice alineadores y fue todo mucho más fácil de lo que imaginaba. 100% recomendado."</p><div class="rcard-name">Lucas R.</div><div class="rcard-src">Google</div></div>
+    <div class="rcard" data-reveal="2"><div class="rcard-stars">★★★★★</div><p class="rcard-q">"Excelentes profesionales y tecnología de primer nivel. Volvería siempre."</p><div class="rcard-name">Florencia M.</div><div class="rcard-src">Google</div></div>
+    <div class="rcard" data-reveal="3"><div class="rcard-stars">★★★★★</div><p class="rcard-q">"Me cambiaron la vida. Hoy sonrío sin vergüenza. Gracias BIODESIGN."</p><div class="rcard-name">Juan P.</div><div class="rcard-src">Google</div></div>
+  </div>
+</section>
+</div>
+
+<div class="wrapped-fab" onclick="openWrapped()">✨ ¿Cuál es tu sonrisa ideal?</div>
+<div class="wrapped-modal-overlay" id="wrapped-modal-overlay" onclick="closeWrapped()"></div>
+<div class="wrapped-modal" id="wrapped-modal">
+  <span class="wrapped-modal-close" onclick="closeWrapped()">✕</span>
+  <div id="wrapped-q2">
+    <div class="wrapped-q-num2" id="wrapped-q-num2"></div>
+    <div class="wrapped-q-text2" id="wrapped-q-text2"></div>
+    <div class="wrapped-opts2" id="wrapped-opts2"></div>
+  </div>
+  <div class="wrapped-result2" id="wrapped-result2">
+    <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)">TU RESULTADO ES</div>
+    <div class="wrapped-result2-title" id="wrapped-result2-title"></div>
+    <div class="wrapped-result2-desc" id="wrapped-result2-desc"></div>
+    <div class="wrapped-restart2" onclick="restartWrapped2()">Volver a intentar</div>
+  </div>
+</div>
+<footer>
+  <div class="footer-brand"><img src="images/01-biodesign-logo.jpg" alt="logo"><div class="footer-brand-text">BIODESIGN<span>Tu Sonrisa Perfecta</span></div></div>
+  <div>
+    <p class="footer-copy">© 2026 Biodesign Argentina</p>
+    <div class="footer-social">
+      <a href="https://instagram.com/tusonrisa.perfecta" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+      <a href="https://facebook.com" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="https://wa.me/5491166431743" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-contact"><a href="mailto:info@biodesignargentina.com">info@biodesignargentina.com</a><a href="https://www.biodesignargentina.com" target="_blank">www.biodesignargentina.com</a></div>
+</footer>
+<script>
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}})},{threshold:0.1});
+document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('nav').style.background=window.scrollY>60?'rgba(5,5,5,0.99)':'rgba(12,12,12,0.97)';},{passive:true});
+const caseSrcs=["images/15-image.jpg", "images/16-image.jpg", "images/17-image.jpg", "images/18-image.jpg", "images/18-image.jpg"];
+const casoBefore=document.getElementById('caso-img-before');
+const casoAfter=document.getElementById('caso-img-after');
+const baSlider=document.getElementById('ba-slider');
+const baAfterWrap=document.getElementById('ba-after-wrap');
+const baHandle=document.getElementById('ba-handle');
+function setBaPos(pct){
+  pct=Math.max(0,Math.min(100,pct));
+  baAfterWrap.style.clipPath=`inset(0 0 0 ${pct}%)`;
+  baHandle.style.left=pct+'%';
+}
+function switchCaso(idx,btn){
+  document.querySelectorAll('.caso-tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  casoBefore.style.opacity='0';casoAfter.style.opacity='0';
+  setTimeout(()=>{
+    casoBefore.src=caseSrcs[idx];
+    casoAfter.src=caseSrcs[idx];
+    casoBefore.style.opacity='1';casoAfter.style.opacity='1';
+    setBaPos(50);
+  },180);
+}
+casoBefore.src=caseSrcs[0];
+casoAfter.src=caseSrcs[0];
+setBaPos(50);
+(function(){
+  let dragging=false;
+  function posFromEvent(e){
+    const rect=baSlider.getBoundingClientRect();
+    const x=(e.touches?e.touches[0].clientX:e.clientX)-rect.left;
+    return (x/rect.width)*100;
+  }
+  function start(e){dragging=true;move(e);}
+  function move(e){if(!dragging)return;setBaPos(posFromEvent(e));if(e.cancelable)e.preventDefault();}
+  function end(){dragging=false;}
+  baSlider.addEventListener('mousedown',start);
+  baSlider.addEventListener('touchstart',start,{passive:false});
+  window.addEventListener('mousemove',move);
+  window.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('mouseup',end);
+  window.addEventListener('touchend',end);
+  baSlider.addEventListener('click',(e)=>{setBaPos(posFromEvent(e));});
+})();
+let cur=null;
+function openPanel(id){if(cur){document.getElementById('tp-'+cur).classList.remove('open');}cur=id;document.getElementById('tp-'+id).classList.add('open');document.getElementById('panel-overlay').classList.add('open');document.body.style.overflow='hidden';if(history.state?.panel!==id){history.pushState({panel:id},'','#'+id);}}
+function closePanel(skipHistory){if(cur){document.getElementById('tp-'+cur).classList.remove('open');cur=null;}document.getElementById('panel-overlay').classList.remove('open');document.body.style.overflow='';if(!skipHistory&&history.state?.panel){history.back();}}
+window.addEventListener('popstate',function(e){if(e.state&&e.state.panel){if(cur)document.getElementById('tp-'+cur).classList.remove('open');cur=e.state.panel;document.getElementById('tp-'+cur).classList.add('open');document.getElementById('panel-overlay').classList.add('open');document.body.style.overflow='hidden';}else if(cur){document.getElementById('tp-'+cur).classList.remove('open');cur=null;document.getElementById('panel-overlay').classList.remove('open');document.body.style.overflow='';}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
+function toggleFaq(el){el.classList.toggle('open');}
+function toggleMas(btn){const g=document.getElementById('mas-grid');const o=g.classList.toggle('open');btn.textContent=o?'− Ocultar tratamientos':'+ Ver más tratamientos';}
+
+// ===== Sistema de pestañas =====
+function switchTab(tab){
+  document.querySelectorAll('.tab-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  const page = document.getElementById('tab-'+tab);
+  if(page) page.classList.add('active');
+  const btn = document.querySelector('.nav-tab[data-tab="'+tab+'"]');
+  if(btn) btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+  // re-trigger reveal animations for newly shown tab
+  setTimeout(()=>{
+    page.querySelectorAll('[data-reveal]').forEach(el=>{
+      const rect = el.getBoundingClientRect();
+      if(rect.top < window.innerHeight){ el.classList.add('vis'); }
+    });
+  }, 50);
+}
+
+// ===== Comparador inteligente (pestaña Tratamientos) =====
+const comp2Data = {
+  alineadores: {name:"Alineadores", duracion:"6-18 meses", visibilidad:"Invisible", comodidad:"Alta — removibles", precio:"$1.050.000"},
+  brackets: {name:"Brackets", duracion:"18-36 meses", visibilidad:"Visible", comodidad:"Media — fijos", precio:"$1.500.000"},
+  carillas: {name:"Carillas", duracion:"1-3 sesiones", visibilidad:"Resultado inmediato", comodidad:"Alta — sin aparatos", precio:"Según piezas"},
+  implantes: {name:"Implantes", duracion:"4-8 meses", visibilidad:"Resultado final natural", comodidad:"Cirugía + recuperación", precio:"Según caso"}
+};
+function getSelectedComp2(){
+  return Array.from(document.querySelectorAll('.comp2-tab.selected')).map(t=>t.dataset.comp);
+}
+function toggleComp2(el){
+  const selected = getSelectedComp2();
+  if(el.classList.contains('selected')){
+    if(selected.length > 1) el.classList.remove('selected');
+  } else {
+    if(selected.length >= 2){
+      document.querySelectorAll('.comp2-tab.selected')[0].classList.remove('selected');
+    }
+    el.classList.add('selected');
+  }
+  renderComp2();
+}
+function renderComp2(){
+  const sel = getSelectedComp2();
+  const rows = ['duracion','visibilidad','comodidad','precio'];
+  const rowLabels = {duracion:'Duración', visibilidad:'Visibilidad', comodidad:'Comodidad', precio:'Precio desde'};
+  const table = document.getElementById('comp2-table');
+  if(!table) return;
+  let html = `<div class="comp2-row" style="grid-template-columns:repeat(${sel.length},1fr)">${sel.map(k=>`<div class="comp2-cell"><span class="comp2-cell-label">${comp2Data[k].name}</span></div>`).join('')}</div>`;
+  rows.forEach(r=>{
+    html += `<div class="comp2-row" style="grid-template-columns:repeat(${sel.length},1fr)">${sel.map(k=>`<div class="comp2-cell"><span class="comp2-cell-label">${rowLabels[r]}</span>${comp2Data[k][r]}</div>`).join('')}</div>`;
+  });
+  table.innerHTML = html;
+}
+
+// ===== Spotify Wrapped widget flotante =====
+const wrappedQuestions2 = [
+  {text:"¿Qué es lo que más te gustaría cambiar?", opts:[
+    {label:"La alineación de mis dientes", val:"alineacion"},
+    {label:"El color / brillo", val:"color"},
+    {label:"Piezas faltantes", val:"piezas"},
+    {label:"Quiero un cambio más integral", val:"integral"}
+  ]},
+  {text:"¿Qué tan rápido querés ver resultados?", opts:[
+    {label:"Lo antes posible", val:"rapido"},
+    {label:"Puedo esperar un proceso gradual", val:"gradual"},
+    {label:"No tengo apuro", val:"sinapuro"}
+  ]},
+  {text:"¿Cómo te gustaría que se vea el resultado final?", opts:[
+    {label:"Natural, que no se note el tratamiento", val:"natural"},
+    {label:"Una sonrisa luminosa, tipo 'Hollywood'", val:"hollywood"},
+    {label:"Funcional ante todo", val:"funcional"}
+  ]}
+];
+let wrappedAnswers2 = [];
+let wrappedStep2 = 0;
+function openWrapped(){
+  document.getElementById('wrapped-modal-overlay').classList.add('open');
+  document.getElementById('wrapped-modal').classList.add('open');
+  renderWrapped2();
+}
+function closeWrapped(){
+  document.getElementById('wrapped-modal-overlay').classList.remove('open');
+  document.getElementById('wrapped-modal').classList.remove('open');
+}
+function renderWrapped2(){
+  const q = wrappedQuestions2[wrappedStep2];
+  document.getElementById('wrapped-q2').style.display = '';
+  document.getElementById('wrapped-result2').classList.remove('show');
+  document.getElementById('wrapped-q-num2').textContent = `PREGUNTA ${wrappedStep2+1} / ${wrappedQuestions2.length}`;
+  document.getElementById('wrapped-q-text2').textContent = q.text;
+  document.getElementById('wrapped-opts2').innerHTML = q.opts.map(o=>`<div class="wrapped-opt2" onclick="answerWrapped2('${o.val}')">${o.label}</div>`).join('');
+}
+function answerWrapped2(val){
+  wrappedAnswers2.push(val);
+  wrappedStep2++;
+  if(wrappedStep2 < wrappedQuestions2.length){ renderWrapped2(); }
+  else { showWrappedResult2(); }
+}
+function showWrappedResult2(){
+  document.getElementById('wrapped-q2').style.display = 'none';
+  const resultEl = document.getElementById('wrapped-result2');
+  resultEl.classList.add('show');
+  let title, desc;
+  if(wrappedAnswers2.includes('hollywood')){ title = 'Sonrisa Hollywood'; desc = 'Buscás un cambio notorio y luminoso. Carillas + blanqueamiento son tu combinación ideal.'; }
+  else if(wrappedAnswers2.includes('integral')){ title = 'Rejuvenecimiento Total'; desc = 'Querés un cambio integral. Combinamos tratamientos dentales con estética facial.'; }
+  else if(wrappedAnswers2.includes('funcional')){ title = 'Sonrisa Funcional'; desc = 'Priorizás la función sobre todo. Te recomendamos evaluar implantes o prótesis.'; }
+  else { title = 'Sonrisa Natural'; desc = 'Preferís resultados sutiles y armoniosos. Alineadores invisibles son tu mejor opción.'; }
+  document.getElementById('wrapped-result2-title').textContent = title;
+  document.getElementById('wrapped-result2-desc').textContent = desc;
+}
+function restartWrapped2(){
+  wrappedAnswers2 = []; wrappedStep2 = 0;
+  renderWrapped2();
+}
+</script>
+<script>
+const TP_CASE_IMGS = ["images/15-image.jpg", "images/16-image.jpg", "images/17-image.jpg"];
+document.querySelectorAll('img[data-case-img]').forEach(img=>{
+  img.src = TP_CASE_IMGS[parseInt(img.dataset.caseImg)];
+});
+</script>
+</body>
+</html>

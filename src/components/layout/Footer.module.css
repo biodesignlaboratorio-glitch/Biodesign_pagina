@@ -1,0 +1,97 @@
+.footer {
+  background: var(--ink);
+  border-top: 1px solid var(--rule);
+  padding: 40px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.brandText {
+  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.16em;
+}
+.brandText span {
+  display: block;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: 0.5rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+.copy {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.social {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.social a {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  color: var(--gold);
+}
+.social a:hover {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+.social svg {
+  width: 18px;
+  height: 18px;
+}
+
+.contact {
+  text-align: right;
+}
+.contact a {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 5px;
+  transition: color 0.25s;
+}
+.contact a:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 720px) {
+  .footer {
+    flex-direction: column;
+    gap: 24px;
+    padding: 36px 28px;
+    text-align: center;
+  }
+  .contact {
+    text-align: center;
+  }
+}

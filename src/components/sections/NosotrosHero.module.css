@@ -1,0 +1,11 @@
+.hero {
+  background: var(--ink);
+  padding: 160px 64px 80px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 130px 28px 64px;
+  }
+}

@@ -1,0 +1,72 @@
+/* Ported from the original .contacto / .form-* / .finput rules.
+   (The original defined these styles but never rendered a contact section;
+   this component supplies the missing markup with the same classes.) */
+
+.contacto {
+  background: var(--ink-soft);
+  padding: 96px 80px;
+}
+.inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.intro {
+  font-size: 0.86rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+  margin: 16px 0 44px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.full {
+  margin-bottom: 12px;
+  text-align: left;
+}
+.finput {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(191, 160, 84, 0.25);
+  color: #fff;
+  padding: 14px 16px;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.finput::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+.finput:focus {
+  border-color: var(--gold);
+}
+.finput option {
+  background: #1a1a1a;
+  color: #fff;
+}
+.textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+.error {
+  color: var(--gold-lt);
+  font-size: 0.72rem;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .contacto {
+    padding: 72px 28px;
+  }
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,239 @@
+/* ============================================================
+   BIODESIGN — Design system / global tokens & shared atoms
+   Ported 1:1 from the original reference/index.html <style> block.
+   Component-specific rules live in their CSS Modules.
+   ============================================================ */
+
+:root {
+  --ink: #0C0C0C;
+  --ink-soft: #1A1A1A;
+  --gold: #BFA054;
+  --gold-lt: #D4B46A;
+  --gold-dim: rgba(191, 160, 84, 0.18);
+  --cream: #F9F7F3;
+  --mid: #5A5652;
+  --rule: rgba(191, 160, 84, 0.22);
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-weight: 300;
+  background: #fff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-inter), "Inter", sans-serif;
+  cursor: pointer;
+}
+
+/* ----------------------------- Section atoms ----------------------------- */
+.sec-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.sec-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  display: block;
+}
+/* Centered eyebrow variant (no leading rule) — used in contacto / centered headers */
+.sec-eyebrow--center {
+  justify-content: center;
+}
+.sec-eyebrow--center::before {
+  display: none;
+}
+
+.sec-h2 {
+  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.12;
+}
+.sec-h2 i {
+  font-style: italic;
+  color: var(--gold);
+}
+.sec-h2--light {
+  color: #fff;
+}
+
+/* ----------------------------- Button atoms ------------------------------ */
+.btn-fill {
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  padding: 14px 30px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background 0.25s, transform 0.25s;
+  display: inline-block;
+}
+.btn-fill:hover {
+  background: var(--gold-lt);
+  transform: translateY(-2px);
+}
+
+.btn-line {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 14px 30px;
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  display: inline-block;
+}
+.btn-line:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  padding: 11px 20px;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+  display: inline-block;
+}
+.btn-dark:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid #d8d5d0;
+  padding: 11px 20px;
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  display: inline-block;
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-ver {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 10px 22px;
+  font-size: 0.64rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  display: inline-block;
+}
+.btn-ver:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-wa {
+  width: 100%;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  padding: 16px 40px;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.btn-wa:hover {
+  background: var(--gold-lt);
+}
+
+/* ----------------------------- Reveal on scroll -------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+[data-reveal].vis {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal="1"] {
+  transition-delay: 0.08s;
+}
+[data-reveal="2"] {
+  transition-delay: 0.16s;
+}
+[data-reveal="3"] {
+  transition-delay: 0.24s;
+}
+[data-reveal="4"] {
+  transition-delay: 0.32s;
+}
+[data-reveal="5"] {
+  transition-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,136 @@
+.casos {
+  background: var(--ink);
+  padding: 80px;
+}
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 44px;
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 3px;
+}
+.tab {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 13px 8px;
+  transition: all 0.25s;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-inter), "Inter", sans-serif;
+}
+.tabOn {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+  background: var(--gold-dim);
+}
+.tab:hover:not(.tabOn) {
+  color: #fff;
+}
+
+.frame {
+  position: relative;
+  line-height: 0;
+  border: 1px solid var(--rule);
+}
+.slider {
+  aspect-ratio: 16 / 10;
+  cursor: ew-resize;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.slider:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.img {
+  object-fit: cover;
+}
+.imgBefore {
+  filter: grayscale(1) brightness(0.92);
+}
+.afterWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+.lbl {
+  position: absolute;
+  top: 16px;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  padding: 5px 12px;
+  z-index: 4;
+}
+.lblA {
+  left: 16px;
+}
+.lblD {
+  right: 16px;
+}
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.handleLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  background: var(--gold);
+  transform: translateX(-50%);
+}
+.handleGrip {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+.note {
+  font-size: 0.66rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-top: 14px;
+  font-style: italic;
+}
+
+@media (max-width: 760px) {
+  .casos {
+    padding: 64px 24px;
+  }
+  .tabs {
+    flex-wrap: wrap;
+  }
+  .tab {
+    flex: 1 1 30%;
+  }
+}

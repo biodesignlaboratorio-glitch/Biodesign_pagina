@@ -1,0 +1,107 @@
+.hero {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  min-height: calc(100vh - 80px);
+  background: var(--ink);
+  overflow: hidden;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 56px 80px 72px;
+  position: relative;
+  z-index: 2;
+}
+.kicker {
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+.h1 {
+  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-size: clamp(3rem, 4.4vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.gw {
+  color: var(--gold);
+}
+.subtitle {
+  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 28px;
+  line-height: 1.3;
+}
+.body {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 400px;
+  margin-bottom: 48px;
+}
+.actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.right {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 90% center;
+  opacity: 0.96;
+  -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.4) 12%,
+      black 30%,
+      black 70%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, black 15%, black 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.4) 12%,
+      black 30%,
+      black 70%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, transparent 0%, black 15%, black 100%);
+  mask-composite: intersect;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .left {
+    padding: 64px 28px 48px;
+    order: 2;
+  }
+  .right {
+    order: 1;
+    min-height: 52vh;
+  }
+}
