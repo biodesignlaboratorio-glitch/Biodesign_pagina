@@ -7,7 +7,7 @@ del prototipo original de una sola página (`reference/index.html`).
 El objetivo fue mantener el **look & feel idéntico** al original, pero con una
 arquitectura profesional y mantenible: separación de **datos ↔ componentes ↔
 estilos**, rutas reales para SEO/deep-linking, tipografías self-hosted y
-animaciones accesibles.
+animaciones accesibles
 
 ---
 
