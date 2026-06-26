@@ -135,35 +135,47 @@ implícito, se documentó la decisión:
 
 ---
 
-## Deploy en Vercel + dominio en Wix
+## Build / export estático
 
-El sitio es estático/SSG; se despliega ideal en **Vercel**.
+El sitio es **100% estático**: `npm run build` genera la carpeta `out/` con HTML
+plano (`output: "export"` en `next.config.ts`). Se puede servir en cualquier
+hosting estático (Netlify, Vercel, GitHub Pages, S3, etc.).
 
-### 1) Subir a Vercel
+> Nota: el export estático no usa la optimización de imágenes on-demand de Next
+> (`images.unoptimized: true`); las imágenes se sirven tal cual desde
+> `public/images/`.
 
-- Subí el repo a GitHub e **importalo en Vercel** (detecta el framework Next.js
-  automáticamente). Alternativa: `npx vercel` desde la raíz del proyecto.
+## Deploy en Netlify (recomendado)
 
-### 2) Agregar el dominio en Vercel
+En la raíz hay un `netlify.toml` que ya define la build:
 
-- En el proyecto: **Settings → Domains**, agregá `biodesignargentina.com` y
-  `www.biodesignargentina.com`. Vercel mostrará los registros DNS necesarios.
+```toml
+[build]
+  command = "npm run build"
+  publish = "out"
+[build.environment]
+  NODE_VERSION = "22"
+```
 
-### 3) Apuntar el DNS desde Wix (Pointing, sin transferir el dominio)
+1. **Add new site → Import an existing project** y conectá el repo de GitHub.
+   Netlify toma el `netlify.toml` automáticamente (build `npm run build`,
+   publica `out/`).
+2. **Domain management → Add a domain:** agregá `biodesignargentina.com` y `www`.
+3. **DNS en Wix** (Pointing — Wix no deja cambiar nameservers):
+   - **A** · Host `@` → **`75.2.60.5`** (load balancer de Netlify)
+   - **CNAME** · Host `www` → **`<tu-sitio>.netlify.app`**
 
-El dominio está en **Wix** y **no** hace falta transferirlo. Wix no permite
-cambiar los *name servers*, así que se usa **Pointing** (registros):
+> Confirmá siempre los valores exactos que muestra **Netlify → Domain
+> management**. La propagación puede tardar hasta 48 h; el HTTPS se emite solo.
 
-1. En Wix: **Dominios → ⋮ (junto al dominio) → Manage DNS Records**.
-2. Agregá / editá:
-   - **A** · Host `@` → IP de Vercel (típicamente **`76.76.21.21`** — usá la que
-     muestre Vercel).
-   - **CNAME** · Host `www` → **`cname.vercel-dns.com`**.
-3. Guardá. La propagación puede tardar **hasta 48 h**. Vercel emite el
-   certificado HTTPS automáticamente cuando detecta los registros.
+## Deploy en Vercel (alternativa)
 
-> Verificá siempre los valores exactos que muestra **Vercel → Domains**, ya que
-> la IP/CNAME pueden variar.
+1. Importá el repo en Vercel (detecta Next.js). Alternativa: `npx vercel`.
+2. **Settings → Domains:** agregá `biodesignargentina.com` y `www`.
+3. **DNS en Wix:** **A** `@` → **`76.76.21.21`** · **CNAME** `www` →
+   **`cname.vercel-dns.com`** (confirmá los valores en Vercel → Domains).
+
+---
 
 Si el dominio final cambia, actualizá `site.url` en `src/data/site.ts` (se usa
 para `metadataBase`, Open Graph, `sitemap.xml` y `robots.txt`).

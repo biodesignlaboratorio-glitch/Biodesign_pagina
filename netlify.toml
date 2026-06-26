@@ -1,0 +1,9 @@
+# Netlify build config — static export of the Next.js app.
+# The site is 100% static (SSG), so we publish the exported `out/` folder.
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"

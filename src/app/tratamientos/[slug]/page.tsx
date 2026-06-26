@@ -5,6 +5,9 @@ import TreatmentDetail from "@/components/treatments/TreatmentDetail";
 
 type Params = { slug: string };
 
+// All treatment pages are known at build time; 404 anything else.
+export const dynamicParams = false;
+
 export function generateStaticParams(): Params[] {
   return treatmentSlugs.map((slug) => ({ slug }));
 }
