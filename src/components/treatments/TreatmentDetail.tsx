@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Treatment } from "@/data/treatments";
+import { casos, casosNote } from "@/data/casos";
 import { waLink } from "@/lib/whatsapp";
 import { WhatsappGlyph } from "@/components/icons";
 import Faq from "./Faq";
+import CaseCompare from "./CaseCompare";
 import styles from "./TreatmentDetail.module.css";
 
 export default function TreatmentDetail({
@@ -11,6 +13,8 @@ export default function TreatmentDetail({
 }: {
   treatment: Treatment;
 }) {
+  const caso = casos.find((c) => c.treatmentSlug === treatment.slug);
+
   return (
     <article className={styles.inner}>
       <Link href="/tratamientos" className={styles.back}>
@@ -95,6 +99,13 @@ export default function TreatmentDetail({
           <Faq items={treatment.faqs} />
         </div>
       </div>
+
+      {caso ? (
+        <div className={styles.cases}>
+          <div className={styles.sectionTitle}>Antes y después</div>
+          <CaseCompare caso={caso} note={casosNote} />
+        </div>
+      ) : null}
 
       {treatment.relatedCaseImages.length > 0 ? (
         <div className={styles.cases}>

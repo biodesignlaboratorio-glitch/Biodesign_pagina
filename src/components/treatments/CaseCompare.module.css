@@ -1,55 +1,17 @@
-.casos {
-  background: var(--ink);
-  padding: 80px;
+.wrap {
+  margin-top: 36px;
 }
-.top {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 44px;
-}
-.tabs {
-  display: flex;
-  gap: 2px;
-  margin-bottom: 3px;
-}
-.tab {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 13px 8px;
-  transition: all 0.25s;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  font-family: var(--font-inter), "Inter", sans-serif;
-}
-.tabOn {
-  color: var(--gold);
-  border-bottom-color: var(--gold);
-  background: var(--gold-dim);
-}
-.tab:hover:not(.tabOn) {
-  color: #fff;
-}
-
 .frame {
   position: relative;
   line-height: 0;
-  border: 1px solid var(--rule);
-}
-.slider {
   aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
   cursor: ew-resize;
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
 }
-.slider:focus-visible {
+.frame:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
@@ -117,20 +79,8 @@
 }
 .note {
   font-size: 0.66rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--mid);
   text-align: center;
   margin-top: 14px;
   font-style: italic;
-}
-
-@media (max-width: 760px) {
-  .casos {
-    padding: 64px 24px;
-  }
-  .tabs {
-    flex-wrap: wrap;
-  }
-  .tab {
-    flex: 1 1 30%;
-  }
 }

@@ -42,7 +42,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Smile Line",
     description: "Los alineadores Smile Line son aparatos removibles y transparentes que corrigen la posición de tus dientes de forma gradual. El tratamiento se planifica digitalmente antes de comenzar.",
     gridDescription: "Corregí tu sonrisa de forma cómoda, estética y predecible con tecnología Smile Line.",
-    image: "/images/08-alineadores-invisibles.jpg",
+    image: "/images/trat-alineadores.png",
     process: [
       { num: "01", name: "Primera consulta", desc: "Evaluación clínica y radiográfica. Si ya tenés estudios, traelos.", price: "$20.000 (se descuenta del total)" },
       { num: "02", name: "Diagnóstico y presupuesto", desc: "Si estás de acuerdo con el plan, avanzás al siguiente paso.", price: "$1.050.000 efectivo" },
@@ -68,13 +68,47 @@ export const treatments: Treatment[] = [
     relatedCaseImages: TP_CASE_IMGS,
   },
   {
+    slug: "primera-consulta",
+    name: "Primera Consulta",
+    badge: "Alineadores Invisibles",
+    gridBadge: "Primer paso",
+    description: "Tu primera consulta para alineadores invisibles incluye evaluación clínica, evaluación radiográfica y escaneo intraoral para planificación digital. Con estos 3 requisitos definimos si sos apto/a para iniciar tu tratamiento.",
+    gridDescription: "Evaluación clínica, radiográfica y escaneo intraoral: el primer paso hacia tu tratamiento con alineadores.",
+    image: "/images/trat-primera-consulta.png",
+    process: [
+      { num: "01", name: "Evaluación clínica", desc: "Revisión clínica completa de tu boca.", price: "Incluido" },
+      { num: "02", name: "Evaluación radiográfica", desc: "Si no tenés estudios actualizados, te damos la orden para hacerlos y enviárnoslos.", price: "Incluido" },
+      { num: "03", name: "Escaneo intraoral", desc: "Escaneo digital para tu planificación, sin moldes.", price: "Incluido" },
+      { num: "04", name: "Diagnóstico", desc: "Si sos apto/a, te contamos el plan, la cantidad de alineadores y las formas de pago.", price: "Incluido" },
+    ],
+    prices: [
+      { label: "Reserva por autoagenda", val: "$20.000" },
+      { label: "Saldo el día de la consulta", val: "$30.000 (efectivo)" },
+      { label: "Total primera cita", val: "$50.000" },
+    ],
+    paymentMethods: STANDARD_PAYMENT_METHODS,
+    alias: "biodesign.arg",
+    faqs: [
+      { q: "¿Qué pasa si no tengo radiografías actualizadas?", a: "Igual podemos hacer la evaluación clínica y el escaneo intraoral en tu primera cita. Te entregamos la orden correspondiente para que hagas los estudios y nos los envíes." },
+      { q: "¿Se pierde el pago de la primera consulta?", a: "No. Si sos apto/a para el tratamiento, los $50.000 se reintegran al iniciar el tratamiento o se descuentan de la colocación de tu primer alineador." },
+      { q: "¿Qué me informan si soy apto/a?", a: "El diagnóstico y plan de tratamiento, la cantidad aproximada de alineadores necesarios y las formas de pago disponibles." },
+      { q: "¿Los pagos son reembolsables?", a: "No, los pagos realizados no son reembolsables por ningún motivo." },
+    ],
+    whatsappNumber: "5491166431743",
+    whatsappMessage: "Hola! Quiero coordinar mi primera consulta para alineadores invisibles. Me pueden dar más información?",
+    reservoUrl: RESERVO_URL,
+    relatedCaseImages: TP_CASE_IMGS,
+    warning: "⚠️ Los pagos realizados no son reembolsables por ningún motivo.",
+    nota: "💛 El pago de tu primera consulta ($50.000) se reintegra al iniciar el tratamiento o se descuenta de la colocación de tu primer alineador.",
+  },
+  {
     slug: "ortodoncia",
     name: "Ortodoncia",
     badge: "Brackets",
     gridBadge: "Brackets",
     description: "La ortodoncia con brackets es el tratamiento clásico para corregir la alineación dental. Ofrecemos brackets metálicos y cerámicos adaptados a cada caso.",
     gridDescription: "Brackets metálicos y cerámicos para corregir la posición de tus dientes.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-ortodoncia.png",
     process: [
       { num: "01", name: "Primera consulta", desc: "Evaluación clínica y radiográfica completa.", price: "$20.000 (se descuenta del total)" },
       { num: "02", name: "Diagnóstico", desc: "Definimos el tipo de brackets más adecuado para tu caso.", price: "$1.500.000 promocional efectivo" },
@@ -107,7 +141,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Veneers",
     description: "Las carillas son finas láminas que se colocan sobre la superficie frontal de los dientes. Permiten cambiar forma, tamaño y color con mínima preparación.",
     gridDescription: "Laminados de porcelana o resina para transformar tu sonrisa con mínima intervención.",
-    image: "/images/10-carillas-esteticas.jpg",
+    image: "/images/trat-carillas.png",
     process: [
       { num: "01", name: "Consulta y diagnóstico", desc: "Evaluamos tu sonrisa y definimos el material adecuado.", price: "$20.000" },
       { num: "02", name: "Diseño de sonrisa", desc: "Planificamos digitalmente el resultado final.", price: "Incluido" },
@@ -139,7 +173,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Estética",
     description: "El blanqueamiento clínico es realizado por especialistas en estética dental. Resultados visibles desde la primera sesión con técnica segura.",
     gridDescription: "Protocolo profesional para una sonrisa notablemente más luminosa y uniforme.",
-    image: "/images/11-blanqueamiento-dental.jpg",
+    image: "/images/trat-blanqueamiento.png",
     process: [
       { num: "01", name: "Consulta previa", desc: "Evaluamos el estado de tus dientes para confirmar que sos candidato/a.", price: "Consultar" },
       { num: "02", name: "Protección", desc: "Protegemos encías y tejidos blandos.", price: "Incluido" },
@@ -170,7 +204,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Implantología",
     description: "Los implantes dentales son la solución definitiva para reemplazar piezas perdidas. Se colocan en el hueso y actúan como raíz artificial para la corona definitiva.",
     gridDescription: "Recuperá la funcionalidad y estética con implantes de titanio de alta precisión.",
-    image: "/images/12-implantes-dentales.jpg",
+    image: "/images/trat-implantes.png",
     process: [
       { num: "01", name: "Consulta y diagnóstico", desc: "Evaluación clínica, radiográfica y de hueso si corresponde.", price: "$20.000" },
       { num: "02", name: "Fase quirúrgica", desc: "Colocación del implante de titanio. Oseointegración: 3-6 meses.", price: "Incluido en presupuesto" },
@@ -202,7 +236,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Cirugía",
     description: "Realizamos extracciones de distintos grados: simples, complejas y cirugías de muelas del juicio o cordales incluidas.",
     gridDescription: "Extracciones simples y complejas realizadas con el máximo cuidado.",
-    image: "/images/13-cirugias-dentales.jpg",
+    image: "/images/trat-cirugias.png",
     process: [
       { num: "01", name: "Consulta y diagnóstico", desc: "Evaluación clínica y radiográfica del diente a extraer.", price: "$20.000" },
       { num: "02", name: "Planificación", desc: "Definimos el tipo de extracción y el protocolo quirúrgico.", price: "Incluido" },
@@ -234,7 +268,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Prevención",
     description: "Realizamos controles periódicos, limpiezas profesionales y tratamiento de caries para mantener tu boca sana.",
     gridDescription: "Limpieza, diagnóstico y tratamiento de caries. La base de tu salud bucal.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-general.png",
     process: [
       { num: "01", name: "Consulta diagnóstico", desc: "Revisación completa y detección de caries.", price: "$20.000" },
       { num: "02", name: "Limpieza profesional", desc: "Remoción de sarro y placa bacteriana.", price: "Incluido o según caso" },
@@ -265,7 +299,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Restauraciones",
     description: "Recuperamos dientes dañados por caries, fracturas o desgaste con materiales de última generación para resultados estéticos y duraderos.",
     gridDescription: "Restauraciones estéticas y funcionales para recuperar tus dientes dañados.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-restauradora.png",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluamos el diente y definimos el tipo de restauración.", price: "$20.000" },
       { num: "02", name: "Preparación", desc: "Remoción del tejido dañado y preparación de la cavidad.", price: "Incluido" },
@@ -296,7 +330,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Encías",
     description: "La periodoncia se ocupa de la salud de las encías y el hueso que sostiene los dientes. El tratamiento a tiempo puede prevenir la pérdida dental.",
     gridDescription: "Tratamiento de gingivitis, periodontitis y cirugía periodontal.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-periodoncia.png",
     process: [
       { num: "01", name: "Diagnóstico periodontal", desc: "Evaluación de encías, medición de bolsas y análisis radiográfico.", price: "$20.000" },
       { num: "02", name: "Raspaje y alisado", desc: "Limpieza profunda bajo la línea de encía.", price: "Incluido en presupuesto" },
@@ -327,7 +361,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Conducto",
     description: "La endodoncia permite salvar un diente con la pulpa comprometida. Se realiza bajo anestesia local y es prácticamente indoloro.",
     gridDescription: "Tratamiento de conducto con anestesia local para salvar tu diente.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-endodoncia.png",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluación clínica y radiográfica.", price: "$20.000" },
       { num: "02", name: "Acceso y limpieza", desc: "Remoción de la pulpa afectada.", price: "Incluido" },
@@ -359,7 +393,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Bruxismo",
     description: "Fabricamos placas dentales a medida para proteger de bruxismo, mantener resultados ortodóncicos o proteger en deportes.",
     gridDescription: "Contenciones, placa de bruxismo y placa deportiva a medida.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-placas.png",
     process: [
       { num: "01", name: "Consulta", desc: "Evaluamos tu necesidad y definimos el tipo de placa.", price: "$20.000" },
       { num: "02", name: "Registro de mordida", desc: "Toma de impresión o escaneo digital.", price: "Incluido" },
@@ -390,7 +424,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Coronas · Puentes",
     description: "La prótesis fija incluye coronas, puentes e incrustaciones que se cementan y no se retiran, devolviendo función y estética de forma permanente.",
     gridDescription: "Coronas, puentes e incrustaciones para restaurar dientes dañados o ausentes.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-protesis-fija.png",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluamos el diente y definimos el tipo de restauración.", price: "$20.000" },
       { num: "02", name: "Preparación dentaria", desc: "Tallado del diente para recibir la corona o puente.", price: "Incluido" },
@@ -422,7 +456,7 @@ export const treatments: Treatment[] = [
     gridBadge: "PPR · PTR",
     description: "La prótesis removible reemplaza uno o varios dientes y se puede retirar para higiene. Ofrecemos PPR, PTR, estructura metálica e híbrida.",
     gridDescription: "Prótesis parcial o total removible, estructura metálica o híbrida.",
-    image: "/images/09-ortodoncia.jpg",
+    image: "/images/trat-protesis-removible.png",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluación clínica y definición del tipo de prótesis.", price: "$20.000" },
       { num: "02", name: "Impresiones", desc: "Toma de modelos para el laboratorio.", price: "Incluido" },
@@ -453,7 +487,7 @@ export const treatments: Treatment[] = [
     gridBadge: "Facial",
     description: "Trabajamos con un equipo especializado en estética facial para complementar y armonizar los resultados dentales con el resto del rostro.",
     gridDescription: "Tratamientos estéticos faciales para una armonía total con tu sonrisa.",
-    image: "/images/13-cirugias-dentales.jpg",
+    image: "/images/trat-estetica-facial.png",
     process: [
       { num: "01", name: "Consulta", desc: "Evaluación facial y definición del plan de tratamiento.", price: "Consultar" },
       { num: "02", name: "Planificación", desc: "Diseñamos el tratamiento de forma personalizada.", price: "Incluido" },
@@ -479,15 +513,40 @@ export const treatments: Treatment[] = [
   },
 ];
 
-/** Primeros 6 — grilla "Tratamientos destacados". */
-export const mainTreatments: Treatment[] = treatments.slice(0, 6);
-
-/** Restantes 8 — se revelan con "Ver más tratamientos". */
-export const moreTreatments: Treatment[] = treatments.slice(6);
-
 /** Mapa slug → tratamiento, para rutas y lookups. */
 export const treatmentsBySlug: Record<string, Treatment> = Object.fromEntries(
   treatments.map((t) => [t.slug, t]),
+);
+
+/** Orden curado — grilla "Tratamientos destacados". */
+const MAIN_SLUGS = [
+  "alineadores",
+  "primera-consulta",
+  "general",
+  "ortodoncia",
+  "carillas",
+  "blanqueamiento",
+  "implantes",
+  "estetica-facial",
+  "protesis-fija",
+];
+
+/** Orden curado — se revelan con "Ver más tratamientos". */
+const MORE_SLUGS = [
+  "restauradora",
+  "periodoncia",
+  "endodoncia",
+  "placas",
+  "protesis-removible",
+  "cirugias",
+];
+
+export const mainTreatments: Treatment[] = MAIN_SLUGS.map(
+  (slug) => treatmentsBySlug[slug],
+);
+
+export const moreTreatments: Treatment[] = MORE_SLUGS.map(
+  (slug) => treatmentsBySlug[slug],
 );
 
 export function getTreatment(slug: string): Treatment | undefined {

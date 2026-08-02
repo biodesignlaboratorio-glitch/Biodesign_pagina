@@ -29,11 +29,15 @@ export function InstagramGlyph(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** Facebook glyph (filled) — verbatim from the original footer. */
-export function FacebookGlyph(props: SVGProps<SVGSVGElement>) {
+/** Instagram glyph (filled) — variante solida del icono de Instagram, para el perfil de estetica. */
+export function InstagramFilledGlyph(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm5.5-3.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"
+      />
     </svg>
   );
 }

@@ -2,19 +2,15 @@
 
 import { useCallback, useRef, useState, type PointerEvent, type KeyboardEvent } from "react";
 import Image from "next/image";
-import { casos, casosNote } from "@/data/casos";
-import styles from "./Casos.module.css";
+import type { CasoTab } from "@/data/casos";
+import styles from "./CaseCompare.module.css";
 
 const STEP = 2;
 
-export default function Casos() {
-  const [caseIndex, setCaseIndex] = useState(0);
+export default function CaseCompare({ caso, note }: { caso: CasoTab; note: string }) {
   const [pos, setPos] = useState(50);
-  const [fading, setFading] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
-
-  const caso = casos[caseIndex];
 
   const setFromClientX = useCallback((clientX: number) => {
     const el = sliderRef.current;
@@ -53,45 +49,11 @@ export default function Casos() {
     }
   };
 
-  const switchCaso = (idx: number) => {
-    if (idx === caseIndex) return;
-    setFading(true);
-    window.setTimeout(() => {
-      setCaseIndex(idx);
-      setPos(50);
-      setFading(false);
-    }, 180);
-  };
-
-  const imgStyle = { opacity: fading ? 0 : 1, transition: "opacity .2s" };
-
   return (
-    <section id="casos" className={styles.casos}>
-      <div className={styles.top} data-reveal>
-        <div>
-          <div className="sec-eyebrow">Resultados reales</div>
-          <h1 className="sec-h2 sec-h2--light">CASOS REALES</h1>
-        </div>
-      </div>
-
-      <div className={styles.tabs} data-reveal="1">
-        {casos.map((c, i) => (
-          <button
-            key={c.label}
-            type="button"
-            className={`${styles.tab} ${i === caseIndex ? styles.tabOn : ""}`}
-            aria-pressed={i === caseIndex}
-            onClick={() => switchCaso(i)}
-          >
-            {c.label}
-          </button>
-        ))}
-      </div>
-
+    <div className={styles.wrap}>
       <div
         ref={sliderRef}
-        className={`${styles.frame} ${styles.slider}`}
-        data-reveal="2"
+        className={styles.frame}
         role="slider"
         tabIndex={0}
         aria-label={`Comparador antes y después — ${caso.label}`}
@@ -110,9 +72,7 @@ export default function Casos() {
           src={caso.before}
           alt={`Antes — ${caso.label}`}
           fill
-          sizes="100vw"
-          priority={caseIndex === 0}
-          style={imgStyle}
+          sizes="(max-width: 820px) 100vw, 1200px"
         />
         <div
           className={styles.afterWrap}
@@ -123,8 +83,7 @@ export default function Casos() {
             src={caso.after}
             alt={`Después — ${caso.label}`}
             fill
-            sizes="100vw"
-            style={imgStyle}
+            sizes="(max-width: 820px) 100vw, 1200px"
           />
         </div>
         <div className={styles.handle} style={{ left: `${pos}%` }}>
@@ -136,8 +95,7 @@ export default function Casos() {
         <span className={`${styles.lbl} ${styles.lblA}`}>ANTES</span>
         <span className={`${styles.lbl} ${styles.lblD}`}>DESPUÉS</span>
       </div>
-
-      <p className={styles.note}>{casosNote}</p>
-    </section>
+      <p className={styles.note}>{note}</p>
+    </div>
   );
 }

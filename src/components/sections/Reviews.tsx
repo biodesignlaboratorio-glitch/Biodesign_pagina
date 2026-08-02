@@ -13,7 +13,7 @@ export default function Reviews() {
             <i>nuestros pacientes</i>
           </h2>
         </div>
-        <div className={styles.badge}>{"★★★★★  Google Reviews · 5.0"}</div>
+        <div className={styles.badge}>{"★★★★★  Google Reviews · 4.7 (184)"}</div>
       </div>
       <div className={styles.grid}>
         {reviews.map((review, i) => (

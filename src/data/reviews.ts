@@ -1,4 +1,4 @@
-/** Testimonios — Google Reviews (4), verbatim from the original. */
+/** Testimonios reales — Google Reviews (solo 5 estrellas), tomados de la ficha de Google Maps. */
 
 export interface Review {
   stars: number;
@@ -11,28 +11,29 @@ export const reviews: Review[] = [
   {
     stars: 5,
     quote:
-      "Una experiencia increíble. El equipo es profesional y el resultado superó mis expectativas.",
-    name: "Martina G.",
+      "Me pareció excelente la atención tanto de la secretaria como la de la doctora. Es un lugar muy confiable y recomendable.",
+    name: "Roxana M.",
     source: "Google",
   },
   {
     stars: 5,
     quote:
-      "Me hice alineadores y fue todo mucho más fácil de lo que imaginaba. 100% recomendado.",
-    name: "Lucas R.",
+      "Te reciben de una forma muy amable y cálida, y la Doctora Lourdes es un amor. 10 de 10 este lugar.",
+    name: "Julia B.",
     source: "Google",
   },
   {
     stars: 5,
     quote:
-      "Excelentes profesionales y tecnología de primer nivel. Volvería siempre.",
-    name: "Florencia M.",
+      "Recomiendo mucho este lugar. La Dra. Lourdes te transmite confianza, te guía y te aconseja.",
+    name: "Lucía I.",
     source: "Google",
   },
   {
     stars: 5,
-    quote: "Me cambiaron la vida. Hoy sonrío sin vergüenza. Gracias BIODESIGN.",
-    name: "Juan P.",
+    quote:
+      "La experiencia fue excelente: la atención, el resultado y el tiempo nulo de espera. Quedé muy feliz.",
+    name: "Agustina F.",
     source: "Google",
   },
 ];

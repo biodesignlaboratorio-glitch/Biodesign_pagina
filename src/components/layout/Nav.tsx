@@ -12,7 +12,6 @@ const TABS = [
   { href: "/", label: "Inicio" },
   { href: "/tratamientos", label: "Tratamientos" },
   { href: "/nosotros", label: "Nosotros" },
-  { href: "/casos", label: "Casos" },
 ];
 
 function isActive(pathname: string, href: string) {

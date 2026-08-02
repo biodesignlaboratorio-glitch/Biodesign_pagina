@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { site } from "@/data/site";
-import { WhatsappGlyph, InstagramGlyph, FacebookGlyph } from "@/components/icons";
+import { WhatsappGlyph, InstagramGlyph, InstagramFilledGlyph } from "@/components/icons";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -31,12 +31,12 @@ export default function Footer() {
             <InstagramGlyph />
           </a>
           <a
-            href={site.social.facebook}
+            href={site.social.instagramEstetica}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Facebook"
+            aria-label="Instagram Estética"
           >
-            <FacebookGlyph />
+            <InstagramFilledGlyph />
           </a>
           <a
             href={site.social.whatsapp}

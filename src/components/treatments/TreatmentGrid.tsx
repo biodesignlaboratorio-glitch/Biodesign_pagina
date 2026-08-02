@@ -92,7 +92,7 @@ export default function TreatmentGrid() {
             key={t.slug}
             treatment={t}
             reveal={i}
-            sizes="(max-width: 540px) 100vw, (max-width: 900px) 50vw, 25vw"
+            sizes="(max-width: 540px) 100vw, (max-width: 900px) 50vw, 33vw"
           />
         ))}
       </div>

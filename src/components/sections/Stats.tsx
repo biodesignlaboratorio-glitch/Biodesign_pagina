@@ -35,7 +35,10 @@ function StatItem({ stat, run }: { stat: Stat; run: boolean }) {
 
   return (
     <div className={styles.stat} data-reveal>
-      <div className={styles.num}>{display}</div>
+      <div className={styles.num}>
+        {display}
+        {stat.suffix ?? ""}
+      </div>
       <div className={styles.label}>{stat.label}</div>
     </div>
   );

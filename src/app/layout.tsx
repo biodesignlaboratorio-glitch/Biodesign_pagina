@@ -88,7 +88,7 @@ const jsonLd = {
   logo: `${site.url}/images/01-biodesign-logo.jpg`,
   telephone: `+${site.whatsapp.main}`,
   priceRange: "$$",
-  sameAs: [site.social.instagram, site.social.facebook],
+  sameAs: [site.social.instagram, site.social.instagramEstetica],
   department: sedes.map((sede) => ({
     "@type": "Dentist",
     name: sede.name,

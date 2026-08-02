@@ -38,9 +38,9 @@ export const site = {
 
   social: {
     instagram: "https://instagram.com/tusonrisa.perfecta",
-    // TODO: el original sólo enlazaba a "https://facebook.com" (genérico).
-    // Confirmar la URL exacta de la página de Facebook de Biodesign.
-    facebook: "https://facebook.com",
+    /** Instagram de estética (Dra. Lourdes Moreno) */
+    instagramEstetica:
+      "https://www.instagram.com/dralourdesmoreno?igsh=MTVoOGE4YjBhZm94eQ==",
     whatsapp: "https://wa.me/5491166431743",
   },
 
