@@ -1,0 +1,42 @@
+.wrap {
+  margin-top: 48px;
+}
+.sectionTitle {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+}
+.imgWrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.img {
+  object-fit: cover;
+}
+.label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

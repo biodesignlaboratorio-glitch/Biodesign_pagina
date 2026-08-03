@@ -1,0 +1,44 @@
+.wrap {
+  margin-top: 48px;
+}
+.sectionTitle {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.placeholder {
+  aspect-ratio: 2.4;
+  background: radial-gradient(ellipse at center, #1c1c1c 0%, #0a0a0a 70%);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.placeholderIcon {
+  width: 36px;
+  height: 36px;
+  color: var(--gold);
+  opacity: 0.85;
+}
+.placeholderText {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

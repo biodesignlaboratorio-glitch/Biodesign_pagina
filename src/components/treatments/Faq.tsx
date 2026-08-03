@@ -5,7 +5,13 @@ import type { Faq as FaqType } from "@/data/treatments";
 import styles from "./Faq.module.css";
 
 /** Accessible FAQ accordion. Multiple items can be open (as in the original). */
-export default function Faq({ items }: { items: FaqType[] }) {
+export default function Faq({
+  items,
+  twoCol = false,
+}: {
+  items: FaqType[];
+  twoCol?: boolean;
+}) {
   const [open, setOpen] = useState<Set<number>>(new Set());
   const baseId = useId();
 
@@ -18,7 +24,7 @@ export default function Faq({ items }: { items: FaqType[] }) {
     });
 
   return (
-    <div className={styles.faqs}>
+    <div className={`${styles.faqs} ${twoCol ? styles.faqsGrid : ""}`}>
       {items.map((faq, i) => {
         const isOpen = open.has(i);
         const panelId = `${baseId}-faq-${i}`;

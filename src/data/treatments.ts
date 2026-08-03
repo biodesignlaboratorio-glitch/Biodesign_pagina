@@ -21,6 +21,43 @@ export interface Treatment {
   relatedCaseImages: string[];
   warning?: string;
   nota?: string;
+  /**
+   * "flyer" (default): usa el layout nuevo — tarjeta de flyers, videos, casos,
+   * FAQ en 2 columnas y banner final. "legacy": usa el layout viejo de
+   * proceso/precios a mano (solo para Primera Consulta por ahora).
+   */
+  layout?: "flyer" | "legacy";
+  /**
+   * Flyers con toda la info del tratamiento (los mismos que se usan en el bot
+   * de WhatsApp). Mientras no estén, se muestra un placeholder "Flyer
+   * próximamente" en su lugar.
+   */
+  flyerImages?: string[];
+  /** Foto destacada junto al encabezado, al lado del título/descripción. */
+  heroImage?: string;
+  /** Títulos para la sección "Videos del tratamiento" (placeholder hasta tener los videos). */
+  videoPlaceholders?: string[];
+  /** Casos reales antes/después — hasta 3, se muestran en grilla fija (sin carrusel). */
+  cases?: {
+    before: string;
+    after: string;
+    /** Poné true si la foto ya trae "ANTES"/"DESPUÉS" escrito encima. */
+    labeled?: boolean;
+  }[];
+  /** CSS aspect-ratio del recuadro de "Casos" (ej. "4/3"). Por defecto 16/10. */
+  caseRatio?: string;
+  /** Poné false para que la sección "Casos" no se muestre (ni el placeholder). */
+  showCasesSection?: boolean;
+  /**
+   * Galería simple (sin comparador antes/después) — reemplaza la sección
+   * "Casos" para tratamientos donde no aplica un antes/después (ej. tipos de
+   * placas). Si está presente, tiene prioridad sobre `cases`.
+   */
+  gallery?: { image: string; label: string }[];
+  /** Título de la sección de galería. Por defecto "Casos". */
+  galleryTitle?: string;
+  /** CSS aspect-ratio de las fotos de la galería. Por defecto 16/10. */
+  galleryRatio?: string;
 }
 
 const STANDARD_PAYMENT_METHODS: PaymentMethod[] = [
@@ -66,15 +103,35 @@ export const treatments: Treatment[] = [
     whatsappMessage: "Hola! Me interesa el tratamiento de Alineadores Invisibles. Me pueden dar más información?",
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
+    heroImage: "/images/hero-alineadores.png",
+    flyerImages: [
+      "/images/flyer-alineadores-info.jpg",
+      "/images/flyer-alineadores-pasos.jpg",
+    ],
+    videoPlaceholders: [
+      "¿Cómo se colocan los alineadores?",
+      "¿Cómo funcionan los alineadores?",
+      "Cuidados y recomendaciones",
+    ],
+    cases: [
+      { before: "/images/caso1-antes.png", after: "/images/caso1-despues.png", labeled: true },
+      { before: "/images/caso2-antes.png", after: "/images/caso2-despues.png", labeled: true },
+      { before: "/images/caso3-antes.png", after: "/images/caso3-despues.png", labeled: true },
+    ],
   },
   {
     slug: "primera-consulta",
+    showCasesSection: false,
     name: "Primera Consulta",
     badge: "Alineadores Invisibles",
     gridBadge: "Primer paso",
     description: "Tu primera consulta para alineadores invisibles incluye evaluación clínica, evaluación radiográfica y escaneo intraoral para planificación digital. Con estos 3 requisitos definimos si sos apto/a para iniciar tu tratamiento.",
     gridDescription: "Evaluación clínica, radiográfica y escaneo intraoral: el primer paso hacia tu tratamiento con alineadores.",
     image: "/images/trat-primera-consulta.png",
+    flyerImages: [
+      "/images/flyer-primera-consulta-info.jpg",
+      "/images/flyer-primera-consulta-pasos.jpg",
+    ],
     process: [
       { num: "01", name: "Evaluación clínica", desc: "Revisión clínica completa de tu boca.", price: "Incluido" },
       { num: "02", name: "Evaluación radiográfica", desc: "Si no tenés estudios actualizados, te damos la orden para hacerlos y enviárnoslos.", price: "Incluido" },
@@ -98,6 +155,11 @@ export const treatments: Treatment[] = [
     whatsappMessage: "Hola! Quiero coordinar mi primera consulta para alineadores invisibles. Me pueden dar más información?",
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
+    videoPlaceholders: [
+      "¿Cómo es tu primera consulta?",
+      "¿Qué pasa si no tengo radiografías?",
+      "¿Qué sucede si sos apto/a?",
+    ],
     warning: "⚠️ Los pagos realizados no son reembolsables por ningún motivo.",
     nota: "💛 El pago de tu primera consulta ($50.000) se reintegra al iniciar el tratamiento o se descuenta de la colocación de tu primer alineador.",
   },
@@ -109,6 +171,15 @@ export const treatments: Treatment[] = [
     description: "La ortodoncia con brackets es el tratamiento clásico para corregir la alineación dental. Ofrecemos brackets metálicos y cerámicos adaptados a cada caso.",
     gridDescription: "Brackets metálicos y cerámicos para corregir la posición de tus dientes.",
     image: "/images/trat-ortodoncia.png",
+    flyerImages: [
+      "/images/flyer-ortodoncia.png",
+    ],
+    cases: [
+      { before: "/images/caso-ortodoncia-1-antes.jpg", after: "/images/caso-ortodoncia-1-despues.jpg" },
+      { before: "/images/caso-ortodoncia-2-antes.jpg", after: "/images/caso-ortodoncia-2-despues.jpg" },
+      { before: "/images/caso-ortodoncia-3-antes.jpg", after: "/images/caso-ortodoncia-3-despues.jpg" },
+    ],
+    caseRatio: "4/3",
     process: [
       { num: "01", name: "Primera consulta", desc: "Evaluación clínica y radiográfica completa.", price: "$20.000 (se descuenta del total)" },
       { num: "02", name: "Diagnóstico", desc: "Definimos el tipo de brackets más adecuado para tu caso.", price: "$1.500.000 promocional efectivo" },
@@ -130,6 +201,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Ortodoncia. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo se colocan los brackets?",
+      "¿Cómo es el mantenimiento diario?",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
     warning: "⚠️ Contenciones post tratamiento no incluidas.",
@@ -142,6 +218,16 @@ export const treatments: Treatment[] = [
     description: "Las carillas son finas láminas que se colocan sobre la superficie frontal de los dientes. Permiten cambiar forma, tamaño y color con mínima preparación.",
     gridDescription: "Laminados de porcelana o resina para transformar tu sonrisa con mínima intervención.",
     image: "/images/trat-carillas.png",
+    flyerImages: [
+      "/images/flyer-carillas.jpg",
+      "/images/flyer-carillas-detalle.png",
+    ],
+    cases: [
+      { before: "/images/caso-carillas-1-antes.jpg", after: "/images/caso-carillas-despues.jpg" },
+      { before: "/images/caso-carillas-2-antes.jpg", after: "/images/caso-carillas-despues.jpg" },
+      { before: "/images/caso-carillas-3-antes.jpg", after: "/images/caso-carillas-despues.jpg" },
+    ],
+    caseRatio: "1.4",
     process: [
       { num: "01", name: "Consulta y diagnóstico", desc: "Evaluamos tu sonrisa y definimos el material adecuado.", price: "$20.000" },
       { num: "02", name: "Diseño de sonrisa", desc: "Planificamos digitalmente el resultado final.", price: "Incluido" },
@@ -163,6 +249,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Carillas Estéticas. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo se colocan las carillas?",
+      "Resina o cerámica: ¿cuál elegir?",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
   },
@@ -174,6 +265,15 @@ export const treatments: Treatment[] = [
     description: "El blanqueamiento clínico es realizado por especialistas en estética dental. Resultados visibles desde la primera sesión con técnica segura.",
     gridDescription: "Protocolo profesional para una sonrisa notablemente más luminosa y uniforme.",
     image: "/images/trat-blanqueamiento.png",
+    flyerImages: [
+      "/images/flyer-blanqueamiento.jpg",
+    ],
+    cases: [
+      { before: "/images/caso-blanqueamiento-1-antes.jpg", after: "/images/caso-blanqueamiento-despues.jpg" },
+      { before: "/images/caso-blanqueamiento-2-antes.jpg", after: "/images/caso-blanqueamiento-despues.jpg" },
+      { before: "/images/caso-blanqueamiento-3-antes.jpg", after: "/images/caso-blanqueamiento-despues.jpg" },
+    ],
+    caseRatio: "4/3",
     process: [
       { num: "01", name: "Consulta previa", desc: "Evaluamos el estado de tus dientes para confirmar que sos candidato/a.", price: "Consultar" },
       { num: "02", name: "Protección", desc: "Protegemos encías y tejidos blandos.", price: "Incluido" },
@@ -193,6 +293,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491156656212",
     whatsappMessage: "Hola! Me interesa el tratamiento de Blanqueamiento Dental. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo es la sesión de blanqueamiento?",
+      "Antes y después del tratamiento",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
     nota: "💜 Para blanqueamiento trabajamos con un equipo especializado. Escribinos al WhatsApp de estética.",
@@ -205,6 +310,13 @@ export const treatments: Treatment[] = [
     description: "Los implantes dentales son la solución definitiva para reemplazar piezas perdidas. Se colocan en el hueso y actúan como raíz artificial para la corona definitiva.",
     gridDescription: "Recuperá la funcionalidad y estética con implantes de titanio de alta precisión.",
     image: "/images/trat-implantes.png",
+    flyerImages: ["/images/flyer-implantes.jpeg"],
+    cases: [
+      { before: "/images/caso-implantes-1-antes.jpg", after: "/images/caso-implantes-despues.jpg" },
+      { before: "/images/caso-implantes-2-antes.jpg", after: "/images/caso-implantes-despues.jpg" },
+      { before: "/images/caso-implantes-3-antes.jpg", after: "/images/caso-implantes-despues.jpg" },
+    ],
+    caseRatio: "4/3",
     process: [
       { num: "01", name: "Consulta y diagnóstico", desc: "Evaluación clínica, radiográfica y de hueso si corresponde.", price: "$20.000" },
       { num: "02", name: "Fase quirúrgica", desc: "Colocación del implante de titanio. Oseointegración: 3-6 meses.", price: "Incluido en presupuesto" },
@@ -225,6 +337,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Implantes Dentales. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo es la cirugía de implantes?",
+      "Proceso de oseointegración",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
     warning: "⚠️ El día de la cirugía concurrí acompañado/a.",
@@ -237,6 +354,15 @@ export const treatments: Treatment[] = [
     description: "Realizamos extracciones de distintos grados: simples, complejas y cirugías de muelas del juicio o cordales incluidas.",
     gridDescription: "Extracciones simples y complejas realizadas con el máximo cuidado.",
     image: "/images/trat-cirugias.png",
+    flyerImages: [
+      "/images/flyer-cirugias.png",
+    ],
+    cases: [
+      { before: "/images/caso-cirugias-1-antes.jpg", after: "/images/caso-cirugias-1-despues.jpg", labeled: true },
+      { before: "/images/caso-cirugias-2-antes.jpg", after: "/images/caso-cirugias-2-despues.jpg", labeled: true },
+      { before: "/images/caso-cirugias-3-antes.jpg", after: "/images/caso-cirugias-3-despues.jpg", labeled: true },
+    ],
+    caseRatio: "2.8",
     process: [
       { num: "01", name: "Consulta y diagnóstico", desc: "Evaluación clínica y radiográfica del diente a extraer.", price: "$20.000" },
       { num: "02", name: "Planificación", desc: "Definimos el tipo de extracción y el protocolo quirúrgico.", price: "Incluido" },
@@ -257,6 +383,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Cirugías Dentales. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo es una extracción quirúrgica?",
+      "Cuidados postoperatorios",
+      "Preguntas frecuentes",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
     warning: "⚠️ Concurrí acompañado/a el día de la intervención.",
@@ -269,6 +400,15 @@ export const treatments: Treatment[] = [
     description: "Realizamos controles periódicos, limpiezas profesionales y tratamiento de caries para mantener tu boca sana.",
     gridDescription: "Limpieza, diagnóstico y tratamiento de caries. La base de tu salud bucal.",
     image: "/images/trat-general.png",
+    flyerImages: [
+      "/images/flyer-general.png",
+    ],
+    cases: [
+      { before: "/images/caso-general-1-antes.jpg", after: "/images/caso-general-1-despues.jpg" },
+      { before: "/images/caso-general-2-antes.jpg", after: "/images/caso-general-2-despues.jpg" },
+      { before: "/images/caso-general-3-antes.jpg", after: "/images/caso-general-3-despues.jpg" },
+    ],
+    caseRatio: "4/3",
     process: [
       { num: "01", name: "Consulta diagnóstico", desc: "Revisación completa y detección de caries.", price: "$20.000" },
       { num: "02", name: "Limpieza profesional", desc: "Remoción de sarro y placa bacteriana.", price: "Incluido o según caso" },
@@ -289,6 +429,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Odontología General. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo es una limpieza profesional?",
+      "Prevención de caries",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
   },
@@ -300,6 +445,15 @@ export const treatments: Treatment[] = [
     description: "Recuperamos dientes dañados por caries, fracturas o desgaste con materiales de última generación para resultados estéticos y duraderos.",
     gridDescription: "Restauraciones estéticas y funcionales para recuperar tus dientes dañados.",
     image: "/images/trat-restauradora.png",
+    flyerImages: [
+      "/images/flyer-restauradora.png",
+    ],
+    cases: [
+      { before: "/images/caso-restauradora-1-antes.jpg", after: "/images/caso-restauradora-1-despues.jpg", labeled: true },
+      { before: "/images/caso-restauradora-2-antes.jpg", after: "/images/caso-restauradora-2-despues.jpg", labeled: true },
+      { before: "/images/caso-restauradora-3-antes.jpg", after: "/images/caso-restauradora-3-despues.jpg", labeled: true },
+    ],
+    caseRatio: "2.75",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluamos el diente y definimos el tipo de restauración.", price: "$20.000" },
       { num: "02", name: "Preparación", desc: "Remoción del tejido dañado y preparación de la cavidad.", price: "Incluido" },
@@ -320,6 +474,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Odontología Restauradora. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo se restaura un diente dañado?",
+      "Materiales y resultados",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
   },
@@ -331,6 +490,15 @@ export const treatments: Treatment[] = [
     description: "La periodoncia se ocupa de la salud de las encías y el hueso que sostiene los dientes. El tratamiento a tiempo puede prevenir la pérdida dental.",
     gridDescription: "Tratamiento de gingivitis, periodontitis y cirugía periodontal.",
     image: "/images/trat-periodoncia.png",
+    flyerImages: [
+      "/images/flyer-periodoncia.png",
+    ],
+    cases: [
+      { before: "/images/caso-periodoncia-1-antes.jpg", after: "/images/caso-periodoncia-1-despues.jpg" },
+      { before: "/images/caso-periodoncia-2-antes.jpg", after: "/images/caso-periodoncia-2-despues.jpg" },
+      { before: "/images/caso-periodoncia-3-antes.jpg", after: "/images/caso-periodoncia-3-despues.jpg" },
+    ],
+    caseRatio: "1.5",
     process: [
       { num: "01", name: "Diagnóstico periodontal", desc: "Evaluación de encías, medición de bolsas y análisis radiográfico.", price: "$20.000" },
       { num: "02", name: "Raspaje y alisado", desc: "Limpieza profunda bajo la línea de encía.", price: "Incluido en presupuesto" },
@@ -351,6 +519,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Periodoncia. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo es el raspaje y alisado?",
+      "Señales de enfermedad periodontal",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
   },
@@ -362,6 +535,15 @@ export const treatments: Treatment[] = [
     description: "La endodoncia permite salvar un diente con la pulpa comprometida. Se realiza bajo anestesia local y es prácticamente indoloro.",
     gridDescription: "Tratamiento de conducto con anestesia local para salvar tu diente.",
     image: "/images/trat-endodoncia.png",
+    flyerImages: [
+      "/images/flyer-endodoncia.png",
+    ],
+    cases: [
+      { before: "/images/caso-endodoncia-1-antes.jpg", after: "/images/caso-endodoncia-1-despues.jpg", labeled: true },
+      { before: "/images/caso-endodoncia-2-antes.jpg", after: "/images/caso-endodoncia-2-despues.jpg", labeled: true },
+      { before: "/images/caso-endodoncia-3-antes.jpg", after: "/images/caso-endodoncia-3-despues.jpg", labeled: true },
+    ],
+    caseRatio: "2.7",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluación clínica y radiográfica.", price: "$20.000" },
       { num: "02", name: "Acceso y limpieza", desc: "Remoción de la pulpa afectada.", price: "Incluido" },
@@ -382,6 +564,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Endodoncia. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo es un tratamiento de conducto?",
+      "Mitos sobre el dolor",
+      "Cuidados posteriores",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
     warning: "⚠️ Una vez finalizado, el diente requiere corona o restauración definitiva (costo independiente).",
@@ -394,6 +581,16 @@ export const treatments: Treatment[] = [
     description: "Fabricamos placas dentales a medida para proteger de bruxismo, mantener resultados ortodóncicos o proteger en deportes.",
     gridDescription: "Contenciones, placa de bruxismo y placa deportiva a medida.",
     image: "/images/trat-placas.png",
+    flyerImages: [
+      "/images/flyer-placas.png",
+    ],
+    gallery: [
+      { image: "/images/trat-placas-1.jpg", label: "Placa de Bruxismo" },
+      { image: "/images/trat-placas-2.jpg", label: "Placa Deportiva" },
+      { image: "/images/trat-placas-3.jpg", label: "Placa de Contención" },
+    ],
+    galleryTitle: "Tipos de placas",
+    galleryRatio: "2.83",
     process: [
       { num: "01", name: "Consulta", desc: "Evaluamos tu necesidad y definimos el tipo de placa.", price: "$20.000" },
       { num: "02", name: "Registro de mordida", desc: "Toma de impresión o escaneo digital.", price: "Incluido" },
@@ -414,6 +611,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Placas Dentales. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo se usa tu placa dental?",
+      "Cuidado y limpieza de la placa",
+      "Preguntas frecuentes",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
   },
@@ -425,6 +627,15 @@ export const treatments: Treatment[] = [
     description: "La prótesis fija incluye coronas, puentes e incrustaciones que se cementan y no se retiran, devolviendo función y estética de forma permanente.",
     gridDescription: "Coronas, puentes e incrustaciones para restaurar dientes dañados o ausentes.",
     image: "/images/trat-protesis-fija.png",
+    flyerImages: [
+      "/images/flyer-protesis-fija.png",
+    ],
+    cases: [
+      { before: "/images/caso-protesis-fija-1-antes.jpg", after: "/images/caso-protesis-fija-1-despues.jpg" },
+      { before: "/images/caso-protesis-fija-2-antes.jpg", after: "/images/caso-protesis-fija-2-despues.jpg" },
+      { before: "/images/caso-protesis-fija-3-antes.jpg", after: "/images/caso-protesis-fija-3-despues.jpg" },
+    ],
+    caseRatio: "4/3",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluamos el diente y definimos el tipo de restauración.", price: "$20.000" },
       { num: "02", name: "Preparación dentaria", desc: "Tallado del diente para recibir la corona o puente.", price: "Incluido" },
@@ -446,6 +657,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Prótesis Fija. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo se colocan coronas y puentes?",
+      "Cuidados de tu prótesis fija",
+      "Preguntas frecuentes",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
   },
@@ -457,6 +673,15 @@ export const treatments: Treatment[] = [
     description: "La prótesis removible reemplaza uno o varios dientes y se puede retirar para higiene. Ofrecemos PPR, PTR, estructura metálica e híbrida.",
     gridDescription: "Prótesis parcial o total removible, estructura metálica o híbrida.",
     image: "/images/trat-protesis-removible.png",
+    flyerImages: [
+      "/images/flyer-protesis-removible.png",
+    ],
+    cases: [
+      { before: "/images/caso-protesis-removible-1-antes.jpg", after: "/images/caso-protesis-removible-1-despues.jpg", labeled: true },
+      { before: "/images/caso-protesis-removible-2-antes.jpg", after: "/images/caso-protesis-removible-2-despues.jpg", labeled: true },
+      { before: "/images/caso-protesis-removible-3-antes.jpg", after: "/images/caso-protesis-removible-3-despues.jpg", labeled: true },
+    ],
+    caseRatio: "2.7",
     process: [
       { num: "01", name: "Diagnóstico", desc: "Evaluación clínica y definición del tipo de prótesis.", price: "$20.000" },
       { num: "02", name: "Impresiones", desc: "Toma de modelos para el laboratorio.", price: "Incluido" },
@@ -477,6 +702,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491166431743",
     whatsappMessage: "Hola! Me interesa el tratamiento de Prótesis Removible. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Cómo se adapta una prótesis removible?",
+      "Cuidado y limpieza diaria",
+      "Preguntas frecuentes",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
   },
@@ -488,6 +718,15 @@ export const treatments: Treatment[] = [
     description: "Trabajamos con un equipo especializado en estética facial para complementar y armonizar los resultados dentales con el resto del rostro.",
     gridDescription: "Tratamientos estéticos faciales para una armonía total con tu sonrisa.",
     image: "/images/trat-estetica-facial.png",
+    flyerImages: [
+      "/images/flyer-estetica-facial.jpg",
+    ],
+    cases: [
+      { before: "/images/caso-estetica-facial-1-antes.jpg", after: "/images/caso-estetica-facial-1-despues.jpg" },
+      { before: "/images/caso-estetica-facial-2-antes.jpg", after: "/images/caso-estetica-facial-2-despues.jpg" },
+      { before: "/images/caso-estetica-facial-3-antes.jpg", after: "/images/caso-estetica-facial-3-despues.jpg" },
+    ],
+    caseRatio: "1.27",
     process: [
       { num: "01", name: "Consulta", desc: "Evaluación facial y definición del plan de tratamiento.", price: "Consultar" },
       { num: "02", name: "Planificación", desc: "Diseñamos el tratamiento de forma personalizada.", price: "Incluido" },
@@ -507,6 +746,11 @@ export const treatments: Treatment[] = [
     ],
     whatsappNumber: "5491156656212",
     whatsappMessage: "Hola! Me interesa el tratamiento de Estética Facial. Me pueden dar más información?",
+    videoPlaceholders: [
+      "¿Qué tratamientos ofrecemos?",
+      "Resultados naturales y armoniosos",
+      "Cuidados y recomendaciones",
+    ],
     reservoUrl: RESERVO_URL,
     relatedCaseImages: TP_CASE_IMGS,
     nota: "💜 Para estética facial trabajamos con un equipo especializado. Escribinos al WhatsApp de estética.",

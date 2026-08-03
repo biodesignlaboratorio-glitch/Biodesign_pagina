@@ -3,6 +3,16 @@
   flex-direction: column;
   gap: 8px;
 }
+.faqsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+@media (max-width: 640px) {
+  .faqsGrid {
+    grid-template-columns: 1fr;
+  }
+}
 .faq {
   border: 1px solid #f0eeea;
   padding: 0 14px;

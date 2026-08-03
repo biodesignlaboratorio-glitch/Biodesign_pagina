@@ -1,0 +1,73 @@
+.banner {
+  margin-top: 48px;
+  padding: 32px 36px;
+  background: #f9f7f3;
+  border-left: 3px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.title {
+  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.sub {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--mid);
+  max-width: 420px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btnWa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 14px 24px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.25s;
+  white-space: nowrap;
+}
+.btnWa:hover {
+  background: var(--gold-lt);
+}
+.btnReserva {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 13px 24px;
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.btnReserva:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+@media (max-width: 640px) {
+  .banner {
+    padding: 28px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

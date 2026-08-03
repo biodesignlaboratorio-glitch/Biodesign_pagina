@@ -2,12 +2,31 @@
 
 import { useCallback, useRef, useState, type PointerEvent, type KeyboardEvent } from "react";
 import Image from "next/image";
-import type { CasoTab } from "@/data/casos";
 import styles from "./CaseCompare.module.css";
 
 const STEP = 2;
 
-export default function CaseCompare({ caso, note }: { caso: CasoTab; note: string }) {
+export default function CaseCompare({
+  before,
+  after,
+  label,
+  note,
+  showLabels = true,
+  grayscaleBefore = true,
+  ratio,
+}: {
+  before: string;
+  after: string;
+  /** Usado en el aria-label y el alt de las fotos. */
+  label: string;
+  note?: string;
+  /** Poné false si las fotos ya traen "ANTES"/"DESPUÉS" incluido. */
+  showLabels?: boolean;
+  /** Poné false para fotos reales a color (sin el efecto blanco y negro del "antes"). */
+  grayscaleBefore?: boolean;
+  /** CSS aspect-ratio del cuadro (ej. "2.4"). Por defecto 16/10. */
+  ratio?: string;
+}) {
   const [pos, setPos] = useState(50);
   const sliderRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
@@ -21,6 +40,7 @@ export default function CaseCompare({ caso, note }: { caso: CasoTab; note: strin
   }, []);
 
   const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    e.preventDefault();
     dragging.current = true;
     sliderRef.current?.setPointerCapture(e.pointerId);
     setFromClientX(e.clientX);
@@ -54,9 +74,10 @@ export default function CaseCompare({ caso, note }: { caso: CasoTab; note: strin
       <div
         ref={sliderRef}
         className={styles.frame}
+        style={ratio ? { aspectRatio: ratio } : undefined}
         role="slider"
         tabIndex={0}
-        aria-label={`Comparador antes y después — ${caso.label}`}
+        aria-label={`Comparador antes y después — ${label}`}
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(pos)}
@@ -68,10 +89,11 @@ export default function CaseCompare({ caso, note }: { caso: CasoTab; note: strin
         onKeyDown={onKeyDown}
       >
         <Image
-          className={`${styles.img} ${styles.imgBefore}`}
-          src={caso.before}
-          alt={`Antes — ${caso.label}`}
+          className={`${styles.img} ${grayscaleBefore ? styles.imgBefore : ""}`}
+          src={before}
+          alt={`Antes — ${label}`}
           fill
+          draggable={false}
           sizes="(max-width: 820px) 100vw, 1200px"
         />
         <div
@@ -80,9 +102,10 @@ export default function CaseCompare({ caso, note }: { caso: CasoTab; note: strin
         >
           <Image
             className={styles.img}
-            src={caso.after}
-            alt={`Después — ${caso.label}`}
+            src={after}
+            alt={`Después — ${label}`}
             fill
+            draggable={false}
             sizes="(max-width: 820px) 100vw, 1200px"
           />
         </div>
@@ -92,10 +115,14 @@ export default function CaseCompare({ caso, note }: { caso: CasoTab; note: strin
             ⇔
           </div>
         </div>
-        <span className={`${styles.lbl} ${styles.lblA}`}>ANTES</span>
-        <span className={`${styles.lbl} ${styles.lblD}`}>DESPUÉS</span>
+        {showLabels ? (
+          <>
+            <span className={`${styles.lbl} ${styles.lblA}`}>ANTES</span>
+            <span className={`${styles.lbl} ${styles.lblD}`}>DESPUÉS</span>
+          </>
+        ) : null}
       </div>
-      <p className={styles.note}>{note}</p>
+      {note ? <p className={styles.note}>{note}</p> : null}
     </div>
   );
 }
