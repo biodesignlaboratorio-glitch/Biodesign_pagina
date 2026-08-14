@@ -8,6 +8,13 @@ const ITEMS = [
   { name: "Radiología Digital", desc: "Diagnóstico preciso, mínima radiación" },
 ];
 
+const PHOTOS = [
+  "/images/instalaciones-laboratorio-1.jpeg",
+  "/images/instalaciones-laboratorio-3.jpeg",
+  "/images/instalaciones-laboratorio-5.jpeg",
+  "/images/instalaciones-laboratorio-11.jpeg",
+];
+
 export default function Digital() {
   return (
     <section id="digital" className={styles.digital}>
@@ -34,14 +41,18 @@ export default function Digital() {
             ))}
           </div>
         </div>
-        <div className={styles.photoWrap} data-reveal="2">
-          <Image
-            className={styles.photo}
-            src="/images/14-tecnologia-digital.jpg"
-            alt="Tecnología digital"
-            fill
-            sizes="(max-width: 860px) 100vw, 58vw"
-          />
+        <div className={styles.photoGrid} data-reveal="2">
+          {PHOTOS.map((src) => (
+            <div key={src} className={styles.photoWrap}>
+              <Image
+                className={styles.photo}
+                src={src}
+                alt="Laboratorio Biodesign"
+                fill
+                sizes="(max-width: 860px) 50vw, 29vw"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

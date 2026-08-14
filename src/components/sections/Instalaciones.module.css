@@ -1,0 +1,71 @@
+.section {
+  background: var(--ink);
+  padding: 80px;
+}
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+.tabs {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 24px;
+}
+.tab {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 13px 8px;
+  transition: all 0.25s;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-inter), "Inter", sans-serif;
+}
+.tabOn {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+  background: var(--gold-dim);
+}
+.tab:hover:not(.tabOn) {
+  color: #fff;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+.photoWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #111;
+}
+.photo {
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.photoWrap:hover .photo {
+  transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: 64px 28px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tabs {
+    flex-wrap: wrap;
+  }
+  .tab {
+    flex: 1 1 30%;
+  }
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import NosotrosHero from "@/components/sections/NosotrosHero";
 import Team from "@/components/sections/Team";
 import Digital from "@/components/sections/Digital";
+import Instalaciones from "@/components/sections/Instalaciones";
 import Porque from "@/components/sections/Porque";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function NosotrosPage() {
       <NosotrosHero />
       <Team />
       <Digital />
+      <Instalaciones />
       <Porque />
     </>
   );

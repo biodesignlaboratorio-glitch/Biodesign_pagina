@@ -39,10 +39,15 @@
   color: var(--mid);
   line-height: 1.6;
 }
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
 .photoWrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 4;
 }
 .photo {
   object-fit: cover;
@@ -55,6 +60,9 @@
   .inner {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  .photoGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
   .items {
     gap: 24px;
